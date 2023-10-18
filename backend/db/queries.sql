@@ -1,0 +1,2 @@
+CREATE DATABASE MedicTabs;
+USE MedicTabs;
