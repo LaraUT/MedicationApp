@@ -1,0 +1,37 @@
+import express from 'express'
+import mysql from 'mysql'
+import cors from 'cors'
+
+const app=express()
+
+const conexion=mysql.createConnection({
+    host : 'localhost',
+    user: 'root',
+    password: '',
+    database: 'medictabs'
+})
+
+conexion.connect((error)=>{
+   if(error){
+      console.log("Upsss, algo salio mal", error)
+   } else {
+      console.log("Conexión realizada")
+   }
+})
+
+app.use(cors())
+
+app.get("/medicamentos",(peticion,respuesta)=>{
+    const sql="SELECT * FROM medicamentos;"
+    conexion.query(sql,(error,resultado)=>{
+        if(error){
+            return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
+        } else{
+            return respuesta.json({Estatus:"Ok", categorias:resultado})
+        }
+    })
+})
+
+app.listen(8082,()=>{
+    console.log('Servidor disponible')
+})
