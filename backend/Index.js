@@ -31,7 +31,7 @@ app.get("/medicamentosManana",(peticion,respuesta)=>{
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
-            return respuesta.json({Estatus:"Ok", categorias:resultado})
+            return respuesta.json({Estatus:"Ok", medicamentos:resultado})
         }
     })
 })
@@ -42,7 +42,7 @@ app.get("/medicamentosMedio",(peticion,respuesta)=>{
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
-            return respuesta.json({Estatus:"Ok", categorias:resultado})
+            return respuesta.json({Estatus:"Ok", medicamentos:resultado})
         }
     })
 })
@@ -53,7 +53,7 @@ app.get("/medicamentosTarde",(peticion,respuesta)=>{
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
-            return respuesta.json({Estatus:"Ok", categorias:resultado})
+            return respuesta.json({Estatus:"Ok", medicamentos:resultado})
         }
     })
 })
@@ -64,7 +64,7 @@ app.get("/medicamentosNoche",(peticion,respuesta)=>{
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
-            return respuesta.json({Estatus:"Ok", categorias:resultado})
+            return respuesta.json({Estatus:"Ok", medicamentos:resultado})
         }
     })
 })

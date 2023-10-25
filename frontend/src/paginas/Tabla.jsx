@@ -1,7 +1,18 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
+import axios from 'axios'
 
 
 function Tabla() {
+  const [medicamentos, setMedicamentos] = useState([]);
+  
+  useEffect(() => {
+    axios.get('http://localhost:8082/medicamentosManana')
+      .then((respuesta) => {
+        setMedicamentos(respuesta.data.medicamentos);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
    <div>
     <h2 className="w-full flex-col text-center font-krona text-[#159D95] text-4xl p-5">CUADRO DE MEDICAMENTOS</h2>
