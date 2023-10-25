@@ -2,7 +2,7 @@ CREATE DATABASE MedicTabs;
 USE MedicTabs;
 
 
--- Crear la tabla Medicamentos
+
 CREATE TABLE Medicamentos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) NOT NULL,
@@ -33,7 +33,6 @@ INSERT INTO Medicamentos (nombre, dosis, hora_programada, seccion, ultima_toma) 
 ('Salbutamol', '1 pastilla', '21:00:00', 'Noche', NULL);
 
 
--- Crear función para calcular la sección en base a la hora programada
 DELIMITER //
 CREATE FUNCTION CalcularSeccion(hora_programada TIME) RETURNS ENUM('Mañana', 'Tarde', 'Noche')
 BEGIN
@@ -50,6 +49,9 @@ BEGIN
     END IF;
     RETURN seccion;
 END //
+
+INSERT INTO Medicamentos (nombre, dosis, hora_programada, seccion, ultima_toma)
+VALUES ('MEdicina aleatoria', '15 pastillas', '08:00:00', CalcularSeccion(NOW()), Null);
 
 
 
