@@ -31,7 +31,7 @@ function LoginForm() {
 
      <div className='text-center justify-center w-full flex '>
      <h3>¿Aun no tienes cuenta? </h3>
-     <Link to="">
+     <Link to="/registros">
       <h3 className='text-[#159D95] '>Registrate</h3>
      </Link>
      </div>
