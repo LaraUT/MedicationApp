@@ -54,7 +54,6 @@ INSERT INTO Medicamentos (nombre, dosis, hora_programada, seccion, ultima_toma)
 VALUES ('MEdicina aleatoria', '15 pastillas', '08:00:00', CalcularSeccion(NOW()), Null);
 
 
-
 SHOW TABLES;
 
 SELECT * FROM Medicamentos;

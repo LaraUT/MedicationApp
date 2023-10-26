@@ -13,8 +13,8 @@ import axios from 'axios'
     }, );
   return (
     <>
-    <th className='bg-[#FF9688] w-40 h-fit border-r-2 font-semibold'>Mañana</th>
-    <td className='bg-[#FF9688]  w-40 h-fit border-r-2 '>
+    <th className='bg-[#FF9688] w-40 h-fit border-r-2 text-pink-600 font-semibold'>Mañana</th>
+    <td className='bg-[#FF9688]  w-40 h-fit text-pink-600 border-r-2 '>
       {medicamentos ? (
         medicamentos.map((medicamento, index) => (
           <h2 className="px-2" style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
@@ -25,7 +25,7 @@ import axios from 'axios'
         <p>Loading...</p>
       )}
     </td>
-    <td className='bg-[#FF9688]  w-40 h-fit border-r-2 text-center'>
+    <td className='bg-[#FF9688]  w-40 h-fit border-r-2 text-pink-600 text-center'>
       {medicamentos ? (
         medicamentos.map((medicamento, index) => (
             <h2 style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
@@ -35,9 +35,11 @@ import axios from 'axios'
       ) : (
         <p>Loading...</p>
       )}
+
+
     </td>
-    <td className='bg-[#FF9688] w-40 h-fit border-r-2'>
-      <td className='bg-[#FF9688]  w-40 h-fit border-r-2 text-center'>
+    <td className='bg-[#FF9688] w-40 h-24 border-r-2'>
+      <td className='bg-[#FF9688] text-pink-600 w-40 h-fit text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
             <h2 style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
@@ -49,8 +51,8 @@ import axios from 'axios'
         )}
       </td>
     </td>
-    <th className='bg-[#FF9688] w-40 h-fit border-r-2'>
-      <th className='bg-[#FF9688]  w-40 h-fit border-r-2'>
+    <th className='bg-[#FF9688] w-40 h-24 border-r-2'>
+      <th className='bg-[#FF9688]  w-40 h-fit '>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
             <h2 style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
@@ -62,6 +64,23 @@ import axios from 'axios'
         )}
       </th>
     </th>
+
+    <th className='bg-[#FF9688] w-40 h-fit'>
+      <th className='bg-[#FF9688]  w-40 h-fit font-semibold text-left '>
+            <h2>{medicamentos ? (
+          medicamentos.map((medicamento, index) => (
+            <h2 className="px-2" style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+              {medicamento.comentarios}
+            </h2>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+</h2>      
+      </th>
+    </th>
+
+
   </>
   )
    

@@ -21,10 +21,6 @@ conexion.connect((error)=>{
 
 app.use(cors())
 
-
-
-
-
 app.get("/medicamentosManana",(peticion,respuesta)=>{
     const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana';"
     conexion.query(sql,(error,resultado)=>{
@@ -68,11 +64,6 @@ app.get("/medicamentosNoche",(peticion,respuesta)=>{
         }
     })
 })
-
-
-
-
-
 
 app.listen(8082,()=>{
     console.log('Servidor disponible')

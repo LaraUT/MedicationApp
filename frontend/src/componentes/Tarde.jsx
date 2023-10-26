@@ -15,8 +15,8 @@ function Tarde() {
 
   return (
     <>
-      <th className='bg-[#5DC1B9] w-40 h-24 border-r-2 font-semibold'>Tarde</th>
-      <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2'>
+      <th className='bg-[#5DC1B9] w-40 h-24 border-r-2  text-teal-700  font-semibold'>Tarde</th>
+      <td className='bg-[#8BDFD8]  w-40 h-fit text-teal-700 border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
             <h2 className="px-2" style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
@@ -27,7 +27,7 @@ function Tarde() {
           <p>Loading...</p>
         )}
       </td>
-      <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2 text-center'>
+      <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2 text-teal-700 text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
             <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
@@ -39,7 +39,7 @@ function Tarde() {
         )}
       </td>
       <td className='bg-[#8BDFD8] w-40 h-fit border-r-2'>
-        <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2 text-center'>
+        <td className='bg-[#8BDFD8] text-teal-700 w-40 h-fit text-center'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
               <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
@@ -52,10 +52,10 @@ function Tarde() {
         </td>
       </td>
       <th className='bg-[#8BDFD8] w-40 h-fit border-r-2'>
-        <th className='bg-[#8BDFD8]  w-40 h-fit border-r-2'>
+        <th className='bg-[#8BDFD8] text-teal-700  w-40 h-fit border-r-2'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 style={{ backgroundColor: index % 2 === 0 ? 'black' : '#8BDFD8' }}>
+              <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
                 {medicamento.ultima_toma}
               </h2>
             ))
@@ -64,8 +64,23 @@ function Tarde() {
           )}
         </th>
       </th>
+      <th className='bg-[#8BDFD8] w-40 h-fit'>
+      <td className='bg-[#8BDFD8] font-semibold text-left font-size:12px  w-40 h-fit px-1  '>
+            <h2>{medicamentos ? (
+          medicamentos.map((medicamento, index) => (
+            <h2 className="" style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+              {medicamento.comentarios}
+            </h2>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+</h2>      
+      </td>
+    </th>
+
+      
     </>
   );
 }
-
 export default Tarde;
