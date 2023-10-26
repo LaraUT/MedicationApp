@@ -15,7 +15,8 @@ function Tarde() {
 
   return (
     <>
-      <th className='bg-[#5DC1B9] w-40 h-24 border-r-2  text-teal-700  font-semibold'>Tarde</th>
+      <th className='bg-[#5DC1B9] w-40 h-24 border-r-2  text-teal-700  font-semibold'>Tarde
+      <img className='w-10 h-10 mb-auto mx-auto' src='https://cdn-icons-png.flaticon.com/128/10179/10179410.png'></img></th>
       <td className='bg-[#8BDFD8]  w-40 h-fit text-teal-700 border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
@@ -51,24 +52,24 @@ function Tarde() {
           )}
         </td>
       </td>
-      <th className='bg-[#8BDFD8] w-40 h-fit border-r-2'>
-        <th className='bg-[#8BDFD8] text-teal-700  w-40 h-fit border-r-2'>
-          {medicamentos ? (
+      <td className='bg-[#8BDFD8] w-40 h-fit border-r-2'>
+      <h2 className='h-30'>{medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+              <h2 className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
                 {medicamento.ultima_toma}
               </h2>
             ))
           ) : (
             <p>Loading...</p>
           )}
-        </th>
-      </th>
-      <th className='bg-[#8BDFD8] w-40 h-fit'>
-      <td className='bg-[#8BDFD8] font-semibold text-left font-size:12px  w-40 h-fit px-1  '>
-            <h2>{medicamentos ? (
+          </h2>
+        </td>
+      
+
+      <td className='bg-[#8BDFD8] text-teal-700 font-semibold font-size  w-80'>
+            <h2 className='h-30'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="" style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
               {medicamento.comentarios}
             </h2>
           ))
@@ -77,7 +78,7 @@ function Tarde() {
         )}
 </h2>      
       </td>
-    </th>
+
 
       
     </>

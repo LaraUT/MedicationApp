@@ -13,7 +13,8 @@ import axios from 'axios'
     }, []);
   return (
     <>
-      <th className='bg-[#FFDBAF] w-40 h-24 border-r-2  text-orange-400 font-semibold'>Mediodia</th>
+      <th className='bg-[#FFDBAF] w-40 h-24 border-r-2  text-orange-400 font-semibold'>Mediodia
+      <img className='items-center justify-center mx-auto mb-auto w-10 h-10 ' src='https://cdn-icons-png.flaticon.com/128/4224/4224494.png'></img></th>
       <td className='bg-[#FFDBAF]  w-40 h-fit text-orange-400 border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
@@ -63,11 +64,10 @@ import axios from 'axios'
         </th>
       </th>
 
-      <th className='bg-[#FFDBAF] w-40 h-fit '>
-      <th className='bg-[#FFDBAF] font-semibold text-left w-40 h-fit '>
-            <h2>{medicamentos ? (
+      <td className='bg-[#FFDBAF] text-orange-400   font-semibold font-size  w-80 '>
+            <h2 className='h-30'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="px-2" style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2 className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
               {medicamento.comentarios}
             </h2>
           ))
@@ -75,8 +75,8 @@ import axios from 'axios'
           <p>Loading...</p>
         )}
 </h2>      
-      </th>
-    </th>
+      </td>
+   
     </>
   )
    
