@@ -20,7 +20,7 @@ function Tarde() {
       <td className='bg-[#8BDFD8]  w-40 h-fit text-teal-700 border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="px-2" style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
               {medicamento.nombre}
             </h2>
           ))

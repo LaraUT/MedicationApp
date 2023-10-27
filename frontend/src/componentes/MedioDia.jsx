@@ -18,7 +18,7 @@ import axios from 'axios'
       <td className='bg-[#FFDBAF]  w-40 h-fit text-orange-400 border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="px-2" style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2  style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
               {medicamento.nombre}
             </h2>
           ))
