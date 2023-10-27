@@ -59,10 +59,10 @@ function Tabla(){
          </thead> 
          </table>
       
-         <table className='my-0.5 font-semibold'>
+         <table className='my-0.5 font-semibold '>
          <thead>
          <tr className='items-center justify-center '>
-         <th className='bg-[#7BDD74] w-40 h-28 border-r-2n font-semibold'>Solo cuando sea necesario
+         <th className='bg-[#7BDD74] w-40 h-28 border-r-2 font-semibold'>Solo cuando sea necesario
          <img className='w-8 h-8 mb-auto mx-auto' src='https://cdn-icons-png.flaticon.com/128/4521/4521504.png'></img></th> 
          <th className='bg-[#B9FFB3] w-40 h-28 border-r-2 font-semibold'>Segunda columna</th>
          <th className='bg-[#B9FFB3] w-40 h-28 border-r-2 font-semibold'>Tercera columna</th>

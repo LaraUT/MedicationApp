@@ -21,6 +21,20 @@ conexion.connect((error)=>{
 
 app.use(cors())
 
+app.post("/medicamentos", (peticion, respuesta) => {
+    const { nombre, dosis, hora_programada, ultima_toma, comentarios,numdosis } = peticion.body;
+
+    const sql = "INSERT INTO medicamentos (nombre, dosis, hora_programada, ultima_toma, comentarios, seccion) VALUES (?, ?, ?, ?, ?, 'Mañana');";
+
+    conexion.query(sql, [nombre, dosis, hora_programada, ultima_toma, comentarios], (error, resultado) => {
+      if (error) {
+        return respuesta.json({ Error: "Upppsie whopsie, alguien configuró mal su back" });
+      } else {
+        return respuesta.json({ Estatus: "Ok", medicamentos: resultado });
+      }
+    });
+  });
+
 app.get("/medicamentosManana",(peticion,respuesta)=>{
     const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana';"
     conexion.query(sql,(error,resultado)=>{
