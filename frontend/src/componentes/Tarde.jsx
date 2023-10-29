@@ -72,19 +72,18 @@ function Tarde() {
         </td>
       
                                         {/*Comentarios*/}
-      <td className='bg-[#8BDFD8] text-teal-700 font-semibold font-size  w-80'>
-            <h2 className='h-30'>{medicamentos ? (
+          <td className='bg-[#8BDFD8]  w-80 h-fit'>
+            <h2 className='h-30 text-teal-700'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
               {medicamento.comentarios}
             </h2>
           ))
         ) : (
           <p>Loading...</p>
         )}
-</h2>      
+          </h2>      
       </td>
-
 
       
     </>

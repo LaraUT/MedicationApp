@@ -67,12 +67,12 @@ import axios from 'axios'
           ))
         ) : (
           <p>Loading...</p>
-        )}
+         )}
       </td>
     </td>   
                                     {/*Comentarios*/}
-    <td className='bg-[#7BDD74] text-[#1d7f13] w-80 h-fit'>
-            <h2 className='h-30'>{medicamentos ? (
+            <td className='bg-[#7BDD74] text-[#1d7f13] w-80 h-fit'>
+            <h2 className='h-30 '>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
             <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
               {medicamento.comentarios}
@@ -81,9 +81,8 @@ import axios from 'axios'
         ) : (
           <p>Loading...</p>
         )}
-          </h2>      
+</h2>      
       </td>
-  
 
 
   </>

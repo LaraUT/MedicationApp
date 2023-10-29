@@ -64,7 +64,7 @@ function Tabla(){
          </thead> 
          </table>
       
-         <table className='my-0.5 font-semibold '>
+         <table className='my-0.5 '>
          <thead>
          <tr className='items-center justify-center '>
          <Necesario/>
