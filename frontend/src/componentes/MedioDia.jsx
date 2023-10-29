@@ -55,19 +55,19 @@ import axios from 'axios'
 
         </td>
       </td>
-      <th className='bg-[#FFDBAF] w-40 h-fit border-r-2'>
-        <th className='bg-[#FFDBAF] text-orange-400  w-40 h-fit border-r-2'>
+      <td className='bg-[#FFDBAF] w-40 h-fit border-r-2 text-center'>
+        <td className='bg-[#FFDBAF] text-orange-400  w-40 h-fit border-r-2'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 style={{ backgroundColor: index % 2 === 0 ? 'black' : '#8BDFD8' }}>
-                {medicamento.ultima_toma}
+              <h2 style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+                {medicamento.fecha_programada}
               </h2>
             ))
           ) : (
             <p>Loading...</p>
           )}
-        </th>
-      </th>
+        </td>
+      </td>
 
       <td className='bg-[#FFDBAF] text-orange-400   font-semibold font-size  w-80 '>
             <h2 className='h-30'>{medicamentos ? (

@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 
- function Mañana() {
+ function Necesario() {
     const [medicamentos, setMedicamentos] = useState([]);
         
     useEffect(() => {
-      axios.get('http://localhost:8082/medicamentosManana')
+      axios.get('http://localhost:8082/medicamentosNecesario')
         .then((respuesta) => {
           setMedicamentos(respuesta.data.medicamentos);
         })
@@ -14,12 +14,12 @@ import axios from 'axios'
   return (
     <>
                                                    {/*Nombre*/}
-    <th className='bg-[#FF9688] w-40 h-fit border-r-2 text-pink-600 font-semibold'>Mañana
-    <img className='w-10 h-10 mb-auto mx-auto'  src='https://cdn-icons-png.flaticon.com/128/3167/3167238.png'></img></th>
-    <td className='bg-[#FF9688]  w-40 h-fit text-pink-600 border-r-2 '>
+    <th className='bg-[#7BDD74] w-40 h-fit border-r-2 text-[#1d7f13] font-semibold'>Solo cuando sea necesario
+    <img className='w-8 h-8 mb-auto mx-auto' src='https://cdn-icons-png.flaticon.com/128/4521/4521504.png'></img></th>
+    <td className='bg-[#7BDD74]  w-40 h-fit text-[#1d7f13] border-r-2 '>
       {medicamentos ? (
         medicamentos.map((medicamento, index) => (
-          <h2  style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+          <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
             {medicamento.nombre}
           </h2>
         ))
@@ -28,10 +28,10 @@ import axios from 'axios'
       )}
     </td>
                                       {/*Dosis*/}
-    <td className='bg-[#FF9688]  w-40 h-fit border-r-2 text-pink-600 text-center'>
+    <td className='bg-[#7BDD74]  w-40 h-fit border-r-2 text-[#1d7f13] text-center'>
       {medicamentos ? (
         medicamentos.map((medicamento, index) => (
-            <h2 style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
             {medicamento.dosis}
           </h2>
         ))
@@ -42,11 +42,11 @@ import axios from 'axios'
 
     </td>
                               {/*Tiempo - hora programada*/}
-    <td className='bg-[#FF9688] w-40 h-24 border-r-2'>
-      <td className='bg-[#FF9688] text-pink-600 w-40 h-fit text-center'>
+    <td className='bg-[#7BDD74] w-40 h-24 border-r-2'>
+      <td className='bg-[#7BDD74] text-[#1d7f13] w-40 h-fit text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
               {medicamento.hora_programada}
               <input className='ml-2' type="checkbox"></input>
             </h2>
@@ -57,11 +57,11 @@ import axios from 'axios'
       </td>
     </td>
                                 
-    <td className='bg-[#FF9688] w-40 h-24 border-r-2  text-pink-600 text-center'>
-      <td className='bg-[#FF9688]  w-40 h-fit '>
+    <td className='bg-[#7BDD74] w-40 h-24 border-r-2 text-center'>
+      <td className='bg-[#7BDD74]  w-40 h-fit text-[#1d7f13]'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
               {medicamento.fecha_programada}
             </h2>
           ))
@@ -71,10 +71,10 @@ import axios from 'axios'
       </td>
     </td>   
                                     {/*Comentarios*/}
-    <td className='bg-[#FF9688] text-pink-600 w-80 h-fit'>
+    <td className='bg-[#7BDD74] text-[#1d7f13] w-80 h-fit'>
             <h2 className='h-30'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
               {medicamento.comentarios}
             </h2>
           ))
@@ -91,4 +91,4 @@ import axios from 'axios'
    
  }
 
-export default Mañana
+export default Necesario

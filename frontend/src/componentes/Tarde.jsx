@@ -58,11 +58,11 @@ function Tarde() {
         </td>
       </td>
                                 {/*Tiempo - ultima_hora*/}
-      <td className='bg-[#8BDFD8] w-40 h-fit border-r-2'>
-      <h2 className='h-30'>{medicamentos ? (
+      <td className='bg-[#8BDFD8] w-40 h-fit border-r-2 text-center'>
+      <h2 className='h-30 text-teal-700'>{medicamentos ? (
             medicamentos.map((medicamento, index) => (
               <h2 className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
-                {medicamento.ultima_toma}
+                {medicamento.fecha_programada}
               </h2>
             ))
           ) : (

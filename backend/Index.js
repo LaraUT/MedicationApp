@@ -60,6 +60,17 @@ app.get("/medicamentosTarde",(peticion,respuesta)=>{
     })
 })
 
+app.get("/medicamentosNecesario",(peticion,respuesta)=>{
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Cuando sea necesario';"
+    conexion.query(sql,(error,resultado)=>{
+        if(error){
+            return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
+        } else{
+            return respuesta.json({Estatus:"Ok", medicamentos:resultado})
+        }
+    })
+})
+
 app.get("/medicamentosNoche",(peticion,respuesta)=>{
     const sql="SELECT * FROM medicamentos WHERE seccion = 'Noche' AND tomas != 0;"
     conexion.query(sql,(error,resultado)=>{
@@ -127,19 +138,28 @@ app.put('/api/hora/:id', (req, res) => {
                 const horaDes = { timeZone: zona, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }; // Use '2-digit' for 24-hour format
                 const formateador = new Intl.DateTimeFormat('en-US', horaDes);
                 const currentTimeInCancun = new Date();
+                console.log(currentTimeInCancun)
                 
                 const formattedTime = formateador.format(currentTimeInCancun);
                 console.log(formattedTime)
                 // Add the value of algo to the current time
                 const newTimeInCancun = new Date(currentTimeInCancun);
+                console.log(newTimeInCancun)
                 newTimeInCancun.setHours(newTimeInCancun.getHours() + horasParaToma);
+
+
+                const days = new Date(newTimeInCancun.getTime() + horasParaToma * 60 * 60 * 1000);
+
+
+                const fecha = `${days.getDate()}-${days.getMonth() + 1}-${days.getFullYear()}`;
+                console.log(fecha)
                 const horaNueva = formateador.format(newTimeInCancun);
 
                 console.log("Current time in Cancun:", formattedTime);
                 console.log("Time in Cancun + Algo hours:", horaNueva);
 
-                const upd = 'UPDATE Medicamentos SET hora_programada = ? ,tomas = ? WHERE id = ?;';
-                const updValues = [horaNueva, tomasRes, id];
+                const upd = 'UPDATE Medicamentos SET hora_programada = ? ,tomas = ?,fecha_programada = ? WHERE id = ?;';
+                const updValues = [horaNueva, tomasRes,fecha, id];
                 conexion.query(upd, updValues, (error, resultados) => {
                     if (error) {
                         console.log(error);
