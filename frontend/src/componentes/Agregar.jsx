@@ -46,7 +46,14 @@ function Agregar({abierto, setAbierto}) {
           type='text'
           placeholder='12'
           />
+        </div>
          </div>
+         <div className='flex flex-col items-center justify-center w-[30%] '>
+         <label className='text-md w-[100%] p-0.5'>Comentarios:</label>
+          <textarea className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%]'
+          type='text'
+          placeholder='Tomarselo antes del desayuno'
+          />
          </div>
          </div>
          <h5>¿Solo cuando sea necesario? <input className='ml-2' type="checkbox"></input> </h5>
