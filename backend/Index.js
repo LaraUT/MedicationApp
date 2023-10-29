@@ -26,6 +26,7 @@ conexion.connect((error)=>{
 app.use(cors())
 
 
+
 app.get("/medicamentosManana",(peticion,respuesta)=>{
     const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas != 0;"
     conexion.query(sql,(error,resultado)=>{
