@@ -58,12 +58,12 @@ function Agregar({abierto, setAbierto}){
   return (
     abierto&& (
         <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
-        <div className="bg-white p-5 rounded flex flex-col justify-center items-center gap-5 h-2/2 w-1/2 relative">
+        <div className="bg-white p-5 rounded flex flex-col justify-center items-center gap-5 h-2/2 w-3/2 relative">
           <p className="w-80 text-center text-2xl ">Nuevo Producto:</p>
           
           <div className='flex flex-col items-center justify-center w-full'>
-         <label className='text-md w-[30%] p-0.5'>Nombre:</label>
-          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[30%] '
+         <label className='text-md w-[60%] p-0.5'>Nombre:</label>
+          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[60%] '
           type='text'
           placeholder='Nombre del producto'
 
@@ -74,8 +74,8 @@ function Agregar({abierto, setAbierto}){
          </div>
 
          <div className='flex flex-col items-center justify-center w-full'>
-         <label className='text-md w-[30%] p-0.5'>Dosis:</label>
-          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[30%] '
+         <label className='text-md w-[60%] p-0.5'>Dosis:</label>
+          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[60%] '
           type='text'
           placeholder='Dosis del producto'
 
@@ -86,21 +86,12 @@ function Agregar({abierto, setAbierto}){
          </div>
 
          <div className='flex flex-col items-center justify-center w-full'>
-         <label className='text-md w-[30%] p-0.5'>Hora del dia:</label>
-          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[30%] '
-          type='text'
-          placeholder='24:00:00'
-
-          name='hora'
-          value={formularioData.hora}
-          onChange={handleInputChange}
-          />
          <div className='flex'>
          </div>
          
-         <div className="flex w-full justify-center gap-7">
-         <div className='flex flex-col items-center justify-center w-[13.5%]'>
-         <label className='text-md w-[100%] p-0.5'>Horas entre dosis:</label>
+         <div className="flex w-full justify-center gap-8">
+         <div className='flex flex-col items-center justify-center w-[26%]'>
+         <label className='text-md w-[100%] p-0.5'>Horas entre cada dosis:</label>
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
           type='text'
           placeholder='8'
@@ -110,11 +101,11 @@ function Agregar({abierto, setAbierto}){
           onChange={handleInputChange}
           />
          </div>
-         <div className='flex flex-col items-center justify-center w-[13.5%]'>
-         <label className='text-md w-[100%] p-0.5'>Numero de dosis:</label>
+         <div className='flex flex-col items-center justify-center w-[26%]'>
+         <label className='text-md w-[100%] p-0.5'>Durante:</label>
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
           type='text'
-          placeholder='12'
+          placeholder='5 dias'
 
           name='tomas'
           value={formularioData.tomas}
@@ -122,7 +113,7 @@ function Agregar({abierto, setAbierto}){
           />
         </div>
          </div>
-         <div className='flex flex-col items-center justify-center w-[30%] '>
+         <div className='flex flex-col items-center justify-center w-[60%] '>
          <label className='text-md w-[100%] p-0.5'>Comentarios:</label>
           <textarea className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%]'
           type='text'
