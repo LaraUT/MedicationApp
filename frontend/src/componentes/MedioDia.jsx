@@ -30,7 +30,7 @@ import axios from 'axios'
       <td className='bg-[#FFDBAF]  w-40 h-fit text-orange-400 border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2  style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2   style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
               {medicamento.nombre}
             </h2>
           ))
@@ -42,7 +42,7 @@ import axios from 'axios'
       <td className='bg-[#FFDBAF]  w-40 h-fit border-r-2 text-orange-400 text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2 key={index}  style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
               {medicamento.dosis}
             </h2>
           ))
@@ -55,7 +55,7 @@ import axios from 'axios'
         <td className='bg-[#FFDBAF] text-orange-400 w-40 h-fit text-center'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+              <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
                 {medicamento.hora_programada}
                 <input className='ml-2' type="checkbox"></input>
               </h2>
@@ -67,10 +67,10 @@ import axios from 'axios'
         </td>
       </td>
       <td className='bg-[#FFDBAF] w-40 h-fit border-r-2 text-center'>
-        <td className='bg-[#FFDBAF] text-orange-400  w-40 h-fit border-r-2'>
+        <td className='bg-[#FFDBAF] text-orange-400  w-40 h-fit'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+              <h2 key={index}  style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
                 {medicamento.fecha_programada}
               </h2>
             ))
@@ -80,10 +80,10 @@ import axios from 'axios'
         </td>
       </td>
 
-      <td className='bg-[#FFDBAF] text-orange-400   font-semibold font-size  w-80 '>
+      <td className='bg-[#FFDBAF] text-orange-400 font-size  w-80 '>
             <h2 className='h-30'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2 key={index}  className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
               {medicamento.comentarios}
             </h2>
           ))

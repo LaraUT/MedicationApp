@@ -26,8 +26,12 @@ function Tabla(){
   return (
    <>   
    <div>
-    <h2 className="w-full flex-col text-center font-krona text-[#159D95] text-4xl p-5">CUADRO DE MEDICAMENTOS</h2>
-    <div className='bg-white rounded-sm  w-[90%] mx-auto h-[90%] border-x-2 border-b-4 border-t flex items-center  justify-center flex-wrap py-20'>
+      <div>
+   <h2 className="w-full flex-col text-center font-krona text-[#159D95] text-4xl p-5">CUADRO DE MEDICAMENTOS
+    </h2>
+      </div>
+
+    <div className='bg-white rounded-sm w-[90%] mx-auto h-[40%] border-x-2 border-b-4 border-t flex items-center  justify-center flex-wrap py-20'>
       <main>
       <table className='h-80'>
       <table className='my-0.5 font-semibold'>
@@ -76,7 +80,7 @@ function Tabla(){
          </thead> 
          </table>
       
-         <table className='my-0.5 font-semibold '>
+         <table className='my-0.5 '>
          <thead>
          <tr className='items-center justify-center '>
          <Necesario/>
@@ -85,12 +89,9 @@ function Tabla(){
          </table>
 
 </table>
-
 <div className='text-right my-10'>
    <button className='bg-cyan-500 w-28 h-8 rounded-md  text-white' type='submit' onClick={() => {setAbierto(true)}}>Agregar</button>
 </div>
-
-
    </main>
    </div>
    </div>

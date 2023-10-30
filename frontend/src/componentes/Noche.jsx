@@ -31,7 +31,7 @@ import axios from 'axios'
       <td className='bg-[#A080A3]  w-40  border-r-2 text-violet-800 text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
+            <h2 key={index} className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
               {medicamento.dosis}
             </h2>
           ))
@@ -44,7 +44,7 @@ import axios from 'axios'
         <td className='bg-[#A080A3] text-violet-800  w-40 h-fit text-center'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
+              <h2 key={index} className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
                 {medicamento.hora_programada}
                 <input className='ml-2' type="checkbox"></input>
               </h2>
@@ -59,7 +59,7 @@ import axios from 'axios'
         <td className='bg-[#A080A3] text-violet-800  w-40 h-fit '>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
+              <h2 key={index} className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
                 {medicamento.fecha_programada}
               </h2>
             ))
@@ -72,7 +72,7 @@ import axios from 'axios'
       <td className='bg-[#A080A3] text-violet-800 w-80 h-fit'>
             <h2 className='h-30 '>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
+            <h2  key={index} className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#A080A3' : '#C096C4' }}>
               {medicamento.comentarios}
             </h2>
           ))
@@ -81,6 +81,7 @@ import axios from 'axios'
         )}
 </h2>      
       </td>
+      
   
     </>
   )
