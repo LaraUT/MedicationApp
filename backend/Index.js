@@ -25,7 +25,16 @@ conexion.connect((error)=>{
 
 app.use(cors())
 
-
+app.get("/medicamentos",(peticion,respuesta)=>{
+    const sql="SELECT * FROM medicamentos WHERE tomas > 0;"
+    conexion.query(sql,(error,resultado)=>{
+        if(error){
+            return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
+        } else{
+            return respuesta.json({Estatus:"Ok", medicamentos:resultado})
+        }
+    })
+})
 
 app.get("/medicamentosManana",(peticion,respuesta)=>{
     const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas > 0;"

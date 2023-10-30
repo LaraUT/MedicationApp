@@ -1,8 +1,21 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
  function Necesario() {
     const [medicamentos, setMedicamentos] = useState([]);
+
+    const handleDelete = (id) => {
+      axios.delete(`http://localhost:8082/api/eliminar/${id}`)
+      .then((response) => {
+        setMedicamentos(medicamentos.filter((medicamento) => medicamento.id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting medication', error);
+      });
+    }
+
         
     useEffect(() => {
       axios.get('http://localhost:8082/medicamentosNecesario')
@@ -71,7 +84,7 @@ import axios from 'axios'
       </td>
     </td>   
                                     {/*Comentarios*/}
-            <td className='bg-[#7BDD74] text-[#1d7f13] w-80 h-fit'>
+            <td className='bg-[#7BDD74] text-[#1d7f13] w-80 h-fit border-r-2'>
             <h2 className='h-30 '>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
             <h2 key={index}  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
@@ -83,6 +96,16 @@ import axios from 'axios'
         )}
 </h2>      
       </td>
+      <td className=' bg-[#7BDD74] text-[#1d7f13] w-8 h-fit border-r-2'>
+      {medicamentos ? (
+            medicamentos.map((medicamento, index) => (
+              <button className='w-full' style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }} onClick={() => handleDelete(medicamento.id)}>x</button>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
+      </td>
+  
 
 
   </>

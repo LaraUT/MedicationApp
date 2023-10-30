@@ -1,9 +1,9 @@
 import React,{ useState } from 'react'
 import axios from 'axios'
 
-function Agregar({abierto, setAbierto,reloadData}){
+function Agregar({abierto, setAbierto}){
 
-  const [formularioData, setFormularioData] = useState({
+  const estadoInicial = ({
     nombre: '',
     dosis: '',
     hora: '',
@@ -12,7 +12,7 @@ function Agregar({abierto, setAbierto,reloadData}){
     comentarios: '',
     SoloNecesario: false,
   });
-
+  const [formularioData, setFormularioData] = useState(estadoInicial);
   const [resultado, setResultado] = useState('');
 
   const handleInputChange = (event) => {
@@ -33,12 +33,19 @@ function Agregar({abierto, setAbierto,reloadData}){
   };
 
   const handleSubmit = () => {
+    console.log('formularioData.comentarios:', formularioData.comentarios);
+    const comentarios = formularioData.comentarios.trim() === '' ? 'Sin comentarios adicionales' : formularioData.comentarios;
+    console.log('comentarios:', comentarios);
+    const formDataFinal = {
+      ...formularioData,
+      comentarios,
+    };
     // Realizar una solicitud POST con Axios
-    axios.post('http://localhost:8082/api/agregar', formularioData)
+    axios.post('http://localhost:8082/api/agregar', formDataFinal)
       .then(response => {
         setResultado(response.data);
         setAbierto(false)
-        reloadData(resultado)
+        setFormularioData(estadoInicial)
       })
       .catch(error => {
         setResultado('Error al enviar el formulario');
@@ -117,13 +124,17 @@ function Agregar({abierto, setAbierto,reloadData}){
           <textarea className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%]'
           type='text'
           placeholder='Tomar antes de...'
+
+           name='comentarios'
+           value={formularioData.comentarios}
+           onChange={handleInputChange}
           />
          </div>
          </div>
          <h5>¿Solo cuando sea necesario?
            <input 
            className='ml-2' 
-           type="checkbox "
+           type="checkbox"
 
            name='SoloNecesario'
            value={formularioData.SoloNecesario}

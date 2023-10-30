@@ -1,8 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Tarde() {
   const [medicamentos, setMedicamentos] = useState([]);
+  
+  const handleTime = (id) => {
+    axios
+      .put(`http://localhost:8082/api/hora/${id}`)
+      .then((response) => {
+        toast.success('Ha tomado su dosis!!! :) Hora actualizada');
+        // Actualizar la tabla una vez que la solicitud PUT sea exitosa
+        const updatedMedicamentos = medicamentos.map((medicamento) =>
+          medicamento.id === id
+            ? { ...medicamento, hasTaken: true }
+            : medicamento
+        );  
+        setMedicamentos(updatedMedicamentos);
+      })
+      .catch((error) =>
+        console.error('Error al realizar la solicitud PUT', error)
+      );
+  };
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:8082/api/eliminar/${id}`)
+    .then((response) => {
+      setMedicamentos(medicamentos.filter((medicamento) => medicamento.id !== id));
+    })
+    .catch((error) => {
+      console.error('Error deleting medication', error);
+    });
+  }
 
   useEffect(() => {
     axios
@@ -11,7 +41,7 @@ function Tarde() {
         setMedicamentos(respuesta.data.medicamentos);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, );
 
   return (
     <>
@@ -49,7 +79,7 @@ function Tarde() {
             medicamentos.map((medicamento, index) => (
               <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
                 {medicamento.hora_programada}
-                <input className='ml-2' type="checkbox"></input>
+                <button className='ml-2' onClick={() => handleTime(medicamento.id)}>✔</button>
               </h2>
             ))
           ) : (
@@ -72,7 +102,7 @@ function Tarde() {
         </td>
       </td>
                                         {/*Comentarios*/}
-          <td className='bg-[#8BDFD8]  w-80 h-fit'>
+          <td className='bg-[#8BDFD8]  w-80 h-fit border-r-2'>
             <h2 className='h-30 text-teal-700'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
             <h2 key={index} className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
@@ -83,6 +113,15 @@ function Tarde() {
           <p>Loading...</p>
         )}
           </h2>      
+      </td>
+      <td className=' bg-[#8BDFD8] text-teal-700 w-8 h-fit border-r-2'>
+      {medicamentos ? (
+            medicamentos.map((medicamento, index) => (
+              <button className='w-full' style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }} onClick={() => handleDelete(medicamento.id)}>x</button>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
       </td>
 
       
