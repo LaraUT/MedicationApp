@@ -52,7 +52,7 @@ function Agregar({abierto, setAbierto}) {
          <label className='text-md w-[100%] p-0.5'>Comentarios:</label>
           <textarea className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%]'
           type='text'
-          placeholder='Tomarselo antes del desayuno'
+          placeholder='Tomar antes de...'
           />
          </div>
          </div>

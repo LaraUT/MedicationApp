@@ -34,7 +34,7 @@ function Tarde() {
       <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2 text-teal-700 text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
               {medicamento.dosis}
             </h2>
           ))
@@ -47,7 +47,7 @@ function Tarde() {
         <td className='bg-[#8BDFD8] text-teal-700 w-40 h-fit text-center'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+              <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
                 {medicamento.hora_programada}
                 <input className='ml-2' type="checkbox"></input>
               </h2>
@@ -59,23 +59,23 @@ function Tarde() {
       </td>
                                 {/*Tiempo - ultima_hora*/}
       <td className='bg-[#8BDFD8] w-40 h-fit border-r-2 text-center'>
-      <h2 className='h-30 text-teal-700'>{medicamentos ? (
+      <td className='h-30 text-teal-700'>{medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+              <h2 key={index} className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
                 {medicamento.fecha_programada}
               </h2>
             ))
           ) : (
             <p>Loading...</p>
           )}
-          </h2>
+          </td>
         </td>
       
                                         {/*Comentarios*/}
           <td className='bg-[#8BDFD8]  w-80 h-fit'>
             <h2 className='h-30 text-teal-700'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 key={index} className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
               {medicamento.comentarios}
             </h2>
           ))

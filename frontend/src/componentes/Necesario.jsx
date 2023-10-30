@@ -19,7 +19,7 @@ import axios from 'axios'
     <td className='bg-[#7BDD74]  w-40 h-fit text-[#1d7f13] border-r-2 '>
       {medicamentos ? (
         medicamentos.map((medicamento, index) => (
-          <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
+          <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
             {medicamento.nombre}
           </h2>
         ))
@@ -31,7 +31,7 @@ import axios from 'axios'
     <td className='bg-[#7BDD74]  w-40 h-fit border-r-2 text-[#1d7f13] text-center'>
       {medicamentos ? (
         medicamentos.map((medicamento, index) => (
-            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
+            <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
             {medicamento.dosis}
           </h2>
         ))
@@ -46,7 +46,7 @@ import axios from 'axios'
       <td className='bg-[#7BDD74] text-[#1d7f13] w-40 h-fit text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
+            <h2 key={index}  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
               {medicamento.hora_programada}
               <input className='ml-2' type="checkbox"></input>
             </h2>
@@ -61,7 +61,7 @@ import axios from 'axios'
       <td className='bg-[#7BDD74]  w-40 h-fit text-[#1d7f13]'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
+            <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
               {medicamento.fecha_programada}
             </h2>
           ))
@@ -74,7 +74,7 @@ import axios from 'axios'
             <td className='bg-[#7BDD74] text-[#1d7f13] w-80 h-fit'>
             <h2 className='h-30 '>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
+            <h2 key={index}  style={{ backgroundColor: index % 2 === 0 ? '#7BDD74' : '#B9FFB3' }}>
               {medicamento.comentarios}
             </h2>
           ))
