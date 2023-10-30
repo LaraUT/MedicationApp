@@ -13,12 +13,7 @@ function Mañana() {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleEliminarMedicamento = (index) => {
-    const nuevosMedicamentos = [...medicamentos];
-    nuevosMedicamentos.splice(index, 1);
-    setMedicamentos(nuevosMedicamentos);
-  };
-
+ 
   return (
     <>
       {/*Nombre*/}
