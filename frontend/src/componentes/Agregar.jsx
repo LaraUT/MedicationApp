@@ -1,5 +1,7 @@
 import React,{ useState } from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Agregar({abierto, setAbierto}){
 
@@ -46,6 +48,7 @@ function Agregar({abierto, setAbierto}){
         setResultado(response.data);
         setAbierto(false)
         setFormularioData(estadoInicial)
+        toast.success('Medicamento agregado :)');
       })
       .catch(error => {
         setResultado('Error al enviar el formulario');

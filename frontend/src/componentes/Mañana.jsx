@@ -29,6 +29,7 @@ function Mañana() {
     axios.delete(`http://localhost:8082/api/eliminar/${id}`)
     .then((response) => {
       setMedicamentos(medicamentos.filter((medicamento) => medicamento.id !== id));
+      toast.error('Medicamento removido');
     })
     .catch((error) => {
       console.error('Error deleting medication', error);
