@@ -4,6 +4,17 @@ import axios from 'axios'
  function MedioDia() {
     const [medicamentos, setMedicamentos] = useState([]);
         
+        const handleCheckboxClick = (id) => {
+      // Realizar la solicitud PUT aquí
+      axios.put(`http://localhost:8082/api/hora/${id}`)
+        .then((response) => {
+          // Manejar la respuesta si es necesario
+          
+          toast.success('Ha tomado su dosis!!!   Hora actualizada');
+        })
+        .catch((error) => console.error('Error al realizar la solicitud PUT', error));
+    };
+
     useEffect(() => {
       axios.get('http://localhost:8082/medicamentosMedio')
         .then((respuesta) => {

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Manana from '../componentes/Mañana'
 import MedioDia from '../componentes/MedioDia'
 import Tarde from '../componentes/Tarde'
@@ -10,6 +10,18 @@ import Agregar from '../componentes/Agregar'
 function Tabla(){
 
    const [abierto, setAbierto] = useState(false)
+
+   const reloadData = () => {
+      // Realiza una solicitud GET para obtener los datos actualizados
+      // y actualiza el estado de la tabla con los nuevos datos
+      axios.get('http://localhost:8082/medicamentos')
+        .then((respuesta) => {
+          // Actualiza el estado con los datos de la respuesta
+          // Esto recargará los datos en la tabla
+        })
+        .catch((error) => console.log(error));
+    };
+
 
   return (
    <>   
@@ -83,7 +95,7 @@ function Tabla(){
    </div>
    </div>
  
-        <Agregar abierto={abierto} setAbierto={setAbierto}/>
+        <Agregar abierto={abierto} setAbierto={setAbierto} reloadData={reloadData}/>
       
   </>
   )

@@ -28,7 +28,7 @@ app.use(cors())
 
 
 app.get("/medicamentosManana",(peticion,respuesta)=>{
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas != 0;"
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas > 0;"
     conexion.query(sql,(error,resultado)=>{
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
