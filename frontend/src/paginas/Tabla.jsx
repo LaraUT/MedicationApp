@@ -6,10 +6,22 @@ import Noche from '../componentes/Noche';
 import Necesario from '../componentes/Necesario';
 import Agregar from '../componentes/Agregar';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Tabla() {
   const [abierto, setAbierto] = useState(false);
+  const navigate = useNavigate()
 
+  const isUserAuthenticated = () => {
+    const status = localStorage.getItem('Status');
+    return status === 'true';
+  };
+  
+  useEffect(()=>{
+    if (!isUserAuthenticated()) {
+      navigate('/');
+    }
+  },[])
 
   return (
     <>

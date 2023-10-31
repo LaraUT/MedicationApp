@@ -8,8 +8,7 @@ function Agregar({abierto, setAbierto}){
   const estadoInicial = ({
     nombre: '',
     dosis: '',
-    hora: '',
-    tomas: '',
+    dias: '',
     horasP: '',
     comentarios: '',
     SoloNecesario: false,
@@ -43,7 +42,11 @@ function Agregar({abierto, setAbierto}){
       comentarios,
     };
     // Realizar una solicitud POST con Axios
-    axios.post('http://localhost:8082/api/agregar', formDataFinal)
+    axios.post('http://localhost:8082/api/agregar', formDataFinal, {
+      params: {
+        user: localStorage.getItem('user')
+      }
+    })
       .then(response => {
         setResultado(response.data);
         setAbierto(false)
@@ -107,8 +110,8 @@ function Agregar({abierto, setAbierto}){
           type='text'
           placeholder='5 dias'
 
-          name='tomas'
-          value={formularioData.tomas}
+          name='dias'
+          value={formularioData.dias}
           onChange={handleInputChange}
           />
         </div>

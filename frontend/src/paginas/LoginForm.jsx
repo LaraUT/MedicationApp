@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 function LoginForm() {
   const navigate = useNavigate();
 
@@ -56,7 +57,7 @@ function LoginForm() {
   };
 
   if (datos.autenticado) {
-    navigate('/');
+    navigate('/tabla');
     return null;
   }
 

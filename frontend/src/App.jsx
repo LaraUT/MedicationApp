@@ -8,15 +8,15 @@ import Tabla from "./paginas/Tabla"
 
 const router = createBrowserRouter([
   {
-    path:"/login",
+    path:"/",
     element: <Login/>
   },
   {
-    path:"/registros",
+    path:"/registro",
     element: <Registros/>
   },
   {
-    path:"/",
+    path:"/tabla",
     element: <Tabla/>
   }
  
