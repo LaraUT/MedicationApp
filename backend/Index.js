@@ -247,3 +247,16 @@ app.post('/registro', (req,res) => {
         }
     })
 })
+
+app.get('/api/perfil', (req,res) => {
+    const sql = 'SELECT * FROM perfiles WHERE Id_Usuario = 2;'
+
+    conexion.query(sql, (error,resultados) => {
+        if (error) {
+            console.error('Error al intentar crear usuario' + error.message);
+            res.status(500).json({ error: 'Error al intentar crear el usuario' });
+        } else {
+            res.json(resultados);
+        }
+    })
+})
