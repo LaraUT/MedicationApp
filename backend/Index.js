@@ -26,8 +26,11 @@ conexion.connect((error)=>{
 app.use(cors())
 
 app.get("/medicamentos",(peticion,respuesta)=>{
-    const sql="SELECT * FROM medicamentos WHERE tomas > 0;"
-    conexion.query(sql,(error,resultado)=>{
+     
+
+    const sql="SELECT * FROM medicamentos WHERE tomas > 0 "
+    
+    conexion.query(sql,values,(error,resultado)=>{
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -36,9 +39,12 @@ app.get("/medicamentos",(peticion,respuesta)=>{
     })
 })
 
-app.get("/medicamentosManana",(peticion,respuesta)=>{
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas > 0;"
-    conexion.query(sql,(error,resultado)=>{
+app.get("/medicamentosManana",(req,respuesta)=>{   
+    const user = req.query.user;
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas > 0 AND Id_Usuario = ? ;"
+    const values = [user];
+    conexion.query(sql,values,(error,resultado)=>{
+        
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -47,9 +53,12 @@ app.get("/medicamentosManana",(peticion,respuesta)=>{
     })
 })
 
-app.get("/medicamentosMedio",(peticion,respuesta)=>{
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Medio dia' AND tomas != 0;"
-    conexion.query(sql,(error,resultado)=>{
+app.get("/medicamentosMedio",(req,respuesta)=>{   
+    const user = req.query.user;
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Medio dia' AND tomas > 0 AND Id_Usuario = ? ;"
+    const values = [user];
+    conexion.query(sql,values,(error,resultado)=>{
+        
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -58,9 +67,12 @@ app.get("/medicamentosMedio",(peticion,respuesta)=>{
     })
 })
 
-app.get("/medicamentosTarde",(peticion,respuesta)=>{
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Tarde' AND tomas != 0;"
-    conexion.query(sql,(error,resultado)=>{
+app.get("/medicamentosTarde",(req,respuesta)=>{   
+    const user = req.query.user;
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Tarde' AND tomas > 0 AND Id_Usuario = ? ;"
+    const values = [user];
+    conexion.query(sql,values,(error,resultado)=>{
+        
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -69,9 +81,12 @@ app.get("/medicamentosTarde",(peticion,respuesta)=>{
     })
 })
 
-app.get("/medicamentosNecesario",(peticion,respuesta)=>{
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Cuando sea necesario';"
-    conexion.query(sql,(error,resultado)=>{
+app.get("/medicamentosNecesario",(req,respuesta)=>{   
+    const user = req.query.user;
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Cuando sea necesario' AND tomas > 0 AND Id_Usuario = ? ;"
+    const values = [user];
+    conexion.query(sql,values,(error,resultado)=>{
+        
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -80,9 +95,12 @@ app.get("/medicamentosNecesario",(peticion,respuesta)=>{
     })
 })
 
-app.get("/medicamentosNoche",(peticion,respuesta)=>{
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Noche' AND tomas != 0;"
-    conexion.query(sql,(error,resultado)=>{
+app.get("/medicamentosNoche",(req,respuesta)=>{   
+    const user = req.query.user;
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Noche' AND tomas > 0 AND Id_Usuario = ? ;"
+    const values = [user];
+    conexion.query(sql,values,(error,resultado)=>{
+        
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -185,3 +203,39 @@ app.put('/api/hora/:id', (req, res) => {
         }
     });
 });
+
+
+app.post('/login', (req,res) => { //req = peticion o request || res = response o result 
+    const datos = req.body
+
+    const sql = 'SELECT * FROM usuarios WHERE correo = ?'
+    const values = [datos.correo]
+
+    conexion.query(sql,values, (error, resultados) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Error de la bd, no?' });
+        }else if (resultados.length === 0 || resultados[0].contrasena !== datos.contrasena) {
+            return res.status(401).json({ message: 'Credenciales incorrectas' });
+
+        } else if(resultados[0].contrasena == datos.contrasena)
+        res.json(resultados);
+        console.log('terminado')
+    })
+})
+
+app.post('/registro', (req,res) => {
+    const datos = req.body
+
+    const sql = 'INSERT INTO usuarios (correo, nombre, contrasena) VALUES (?,?,?)'
+    const values = [datos.correo, datos.nombre, datos.contrasena]
+
+    conexion.query(sql,values,(error,resultados) => {
+        if (error) {
+            console.error('Error al intentar crear usuario' + error.message);
+            res.status(500).json({ error: 'Error al intentar crear el usuario' });
+        } else {
+            res.json({ message: 'Usuario registrado con éxito' });
+        }
+    })
+})

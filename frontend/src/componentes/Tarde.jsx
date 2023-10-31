@@ -36,13 +36,17 @@ function Tarde() {
   }
 
   useEffect(() => {
+    const user = localStorage.getItem('user');
+    
     axios
-      .get('http://localhost:8082/medicamentosTarde')
+      .get('http://localhost:8082/medicamentosTarde',{
+        params: {user}
+      })
       .then((respuesta) => {
         setMedicamentos(respuesta.data.medicamentos);
       })
       .catch((error) => console.log(error));
-  }, );
+  },);
 
   return (
     <>

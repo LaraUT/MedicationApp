@@ -19,12 +19,18 @@ import 'react-toastify/dist/ReactToastify.css';
 
         
     useEffect(() => {
-      axios.get('http://localhost:8082/medicamentosNecesario')
+      const user = localStorage.getItem('user');
+      
+      axios
+        .get('http://localhost:8082/medicamentosNecesario',{
+          params: {user}
+        })
         .then((respuesta) => {
           setMedicamentos(respuesta.data.medicamentos);
         })
         .catch((error) => console.log(error));
-    }, );
+    },);
+
   return (
     <>
                                                    {/*Nombre*/}

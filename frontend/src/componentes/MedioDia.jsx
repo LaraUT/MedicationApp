@@ -36,12 +36,18 @@ import 'react-toastify/dist/ReactToastify.css';
     }
 
     useEffect(() => {
-      axios.get('http://localhost:8082/medicamentosMedio')
+      const user = localStorage.getItem('user');
+      
+      axios
+        .get('http://localhost:8082/medicamentosMedio',{
+          params: {user}
+        })
         .then((respuesta) => {
           setMedicamentos(respuesta.data.medicamentos);
         })
         .catch((error) => console.log(error));
-    }, );
+    },);
+
   return (
     <> 
                                               {/*Tiempo - hora programada*/}

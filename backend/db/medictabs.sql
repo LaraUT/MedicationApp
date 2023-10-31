@@ -2,7 +2,6 @@ CREATE DATABASE MedicTabs;
 USE MedicTabs;
 
 
-
 CREATE TABLE Medicamentos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) NOT NULL,
@@ -73,3 +72,18 @@ INSERT INTO Medicamentos (nombre, dosis, hora_programada, fecha_programada, secc
 ('Prueba', '1 pastilla', '21:00:00', '29-10-2023', 'Noche', false, 10, 10);
 
 sELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas >=0
+
+
+CREATE TABLE usuarios(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    correo VARCHAR(80) NOT NULL UNIQUE,
+    nombre VARCHAR(20) NOT NULL,
+    contrasena VARCHAR(200) NOT NULL,
+    fecha_creacion TIME DEFAULT NOW()
+);
+
+insert into usuarios (correo, nombre,contrasena,fecha_creacion) values ('correo','nombre','contrasena',NOW());
+
+insert into usuarios (correo, nombre,contrasena,fecha_creacion) values ('correo@algo.com','nombre','contrasena',NOW())
+select * from usuarios
+
