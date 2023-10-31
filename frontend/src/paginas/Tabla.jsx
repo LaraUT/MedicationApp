@@ -9,6 +9,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Tabla() {
+
+  const cerrarSesion = () => {
+    localStorage.clear();
+    setIsopen(false)
+    navigate('/')
+  };
+
+
   const [abierto, setAbierto] = useState(false);
   const navigate = useNavigate()
 
@@ -123,7 +131,10 @@ function Tabla() {
             <button className="text-white px-2 border bg-teal-500 rounded-md w-32" >
               Cambiar Perfil
             </button>
-            <button className="text-white bg-red-600  m-3 px-2 border border-red-600 rounded-md w-32">
+            <button className="text-white bg-red-600  m-3 px-2 border border-red-600 rounded-md w-32
+            "
+            onClick={() => cerrarSesion()}
+            >
               Cerrar Sesion
             </button>
           </div>

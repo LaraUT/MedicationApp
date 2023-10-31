@@ -115,9 +115,17 @@ app.listen(8082,()=>{
 
 
 app.post('/api/agregar', (req, res) => {
+
+    const horaDes = { timeZone: 'America/Cancun', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }; // Use '2-digit' for 24-hour format
+    const formateador = new Intl.DateTimeFormat('en-US', horaDes);
+    const currentTimeInCancun = new Date();
+    const formattedTime = formateador.format(currentTimeInCancun);
+
+    const user = req.query.user;
     const datos = req.body
-    const sql= "INSERT INTO Medicamentos (nombre, dosis, hora_programada, tomas, horaTomas, comentarios, SoloNecesario) VALUES (?,?,?,?,?,?,?)"
-    const values = [datos.nombre, datos.dosis, datos.hora, datos.tomas, datos.horasP,datos.comentarios,datos.SoloNecesario]
+    const tomas = (datos.dias * 24) / datos.horasP
+    const sql= "INSERT INTO Medicamentos (nombre, dosis, hora_programada, tomas, horaTomas, comentarios, SoloNecesario,Id_Usuario) VALUES (?,?,?,?,?,?,?,?)"
+    const values = [datos.nombre, datos.dosis, formattedTime, tomas, datos.horasP,datos.comentarios,datos.SoloNecesario,user]
 
     conexion.query(sql, values, (error, resultados) =>{
         if(error){
@@ -161,14 +169,14 @@ app.put('/api/hora/:id', (req, res) => {
 
             // Check if algo is a valid number of hours
             if (!isNaN(horasParaToma) && horasParaToma >= 0 && horasParaToma <= 23) {
-                const zona = 'America/Cancun'; // Cancun's time zone
-                const horaDes = { timeZone: zona, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }; // Use '2-digit' for 24-hour format
+
+                const horaDes = { timeZone: 'America/Cancun', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }; // Use '2-digit' for 24-hour format
                 const formateador = new Intl.DateTimeFormat('en-US', horaDes);
                 const currentTimeInCancun = new Date();
-                console.log(currentTimeInCancun)
+
                 
                 const formattedTime = formateador.format(currentTimeInCancun);
-                console.log(formattedTime)
+
                 // Add the value of algo to the current time
                 const newTimeInCancun = new Date(currentTimeInCancun);
                 console.log(newTimeInCancun)
