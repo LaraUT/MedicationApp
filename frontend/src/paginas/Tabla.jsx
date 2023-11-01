@@ -10,12 +10,13 @@ import { useNavigate } from 'react-router-dom';
 
 function Tabla() {
 
+  const [perfiles,setPerfiles] = useState('');
+
   const cerrarSesion = () => {
     localStorage.clear();
     setIsopen(false)
     navigate('/')
   };
-
 
   const [abierto, setAbierto] = useState(false);
   const navigate = useNavigate()
@@ -32,9 +33,22 @@ function Tabla() {
   },[])
   const [isopen, setIsopen] = useState(false);
 
+  const perfil = 
+  axios.get('http://localhost:8082/api/perfil',{
+  })
+  .then((respuesta)=>{
+    setPerfiles(respuesta.data);
+    console.log(respuesta.data)
+  })
+  .catch((error) => console.log(error));
+
+
   return (
     <>
       <div>
+        
+
+        
         <div>
           <div className='flex justify-end'>
           <img className='w-14 h-14 m-[1%] absolute' src='https://cdn-icons-png.flaticon.com/128/3177/3177440.png' onClick={() => { setIsopen(true) }}></img>
@@ -145,7 +159,37 @@ function Tabla() {
      
       {/*Final modal*/}
 
+      {/*Inicio modal*/}
 
+      <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex justify-center items-center">
+        <div className="bg-white p-5 rounded flex flex-col justify-center items-center gap-5 h-[80%] w-[80%] relative">
+        
+          <p className="w-80 text-center text-2xl mb-8">¿Quien eres? Elige tu perfil</p>
+          <div className="w-5/12 overflow-hidden">
+
+          <div className='flex'>
+             {perfiles ?(
+              perfiles.map((perfil) =>(
+                <div key={perfil.id} className='flex flex-col items-center justify-center text-center m-5'>
+                  <button><img className=' m-3 w-24 h-24 rounded-lg ' src='https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671142.jpg?w=740&t=st=1698797122~exp=1698797722~hmac=99f805391691fba4454095beb889488d371493ee82c21f02461d4ef81295eedf'></img></button>
+                  <h2 className='flex-col text-center' type='submit'>{perfil.nombre_perfil} <button className='text-red-500 text-center px-1.5' type='submit'>x</button></h2>
+                 
+                </div>
+                
+              ))
+             ) : (
+              <p>Loading..</p>
+             )}
+             <div className='flex items-center flex-col justify-center text-center m-5'>
+              <button type='submit'><img className=' m-3 w-24 h-24' src='https://cdn.icon-icons.com/icons2/495/PNG/512/add-circle-1_icon-icons.com_48714.png'></img></button>
+              <h2 className='m-2 text-sm  whitespace-nowrap' >Añadir perfiles</h2>
+            </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      {/*Final modal*/}
 
 
       <Agregar abierto={abierto} setAbierto={setAbierto}/>
