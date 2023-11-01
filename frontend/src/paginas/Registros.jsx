@@ -1,64 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-  function Registros() {
+function Registros() {
 
-  const navigate = useNavigate()
-  const [error, setError] = useState('');
-  const [datos,setDatos] = useState({
+  const navigate = useNavigate();
+
+  const [datos, setDatos] = useState({
     correo: '',
-    contrasenaConfirm:'',
     contrasena: '',
-    nombre:'',
     autenticado: false,
-  })
+    user: '',   
+    contrasenaConfirm: '',
+    user: '',
+  });
 
-  if (datos.autenticado) {
-    navigate('/');
-    return null;
-  }
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const status = localStorage.getItem('Status');
     const correo = localStorage.getItem('correo');
+    const user = localStorage.getItem('user')
     if (status === 'true') {
-      setDatos({ ...datos, autenticado: true, correo });
+      setDatos({ ...datos, autenticado: true, correo, });
     }
   }, []);
 
   useEffect(() => {
-    console.log(datos.autenticado); // This will show the updated value
+    console.log(datos.autenticado); 
     localStorage.setItem('correo', datos.correo);
     localStorage.setItem('Status', datos.autenticado);
-  }, [datos.autenticado, datos.correo]);
+    localStorage.setItem('user', datos.user)
+
+  }, [datos.autenticado, datos.correo, datos.user]);
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (datos.contrasena !== datos.contrasenaConfirm) {
-      setError('Las contraseñas no coinciden');
-    } else {
-      axios
-        .post('http://localhost:8082/registro', datos)
-        .then((response) => {
-          if (response.status === 200) {
-            // Update the status to true in local storage
-            localStorage.setItem('Status', 'true');
-            setDatos({ ...datos, autenticado: true });
-            navigate('/'); // Redirect to the homepage on successful registration
-          } else {
-            setError('Error al registrar. Inténtalo de nuevo');
-          }
-        })
-        .catch((error) => {
-          console.log('Error en el registro');
-          setError('El registro salió mal');
-        });
-    }
+    axios
+      .post('http://localhost:8082/registro', datos)
+      .then((respuesta) => {
+        if (respuesta.status === 200) {
+          console.log(respuesta.data[0].id)
+          setDatos({ ...datos, autenticado: true, user:respuesta.data[0].id });
+          
+          console.log('Bien del front')
+          
+        } else {
+          setError('Credenciales incorrectas, inténtalo de nuevo');
+        }
+        
+      })
+      .catch((error) => {
+        console.error('Error al iniciar sesión: ' + error);
+        setError('Error al iniciar sesión. Inténtalo de nuevo más tarde.');
+      });
+  };
 
-
-
-
+  if (datos.autenticado) {
+    navigate('/tabla');
+    return null;
   }
   
     return (

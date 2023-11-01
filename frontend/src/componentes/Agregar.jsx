@@ -92,7 +92,7 @@ function Agregar({abierto, setAbierto}){
          <div className='flex'>
          </div>
          
-         <div className="flex w-full justify-center gap-8">
+         <div className="flex w-full justify-center gap-8 ">
          <div className='flex flex-col items-center justify-center w-[26%]'>
          <label className='text-md w-[100%] p-0.5'>Horas entre cada dosis:</label>
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
@@ -104,8 +104,8 @@ function Agregar({abierto, setAbierto}){
           onChange={handleInputChange}
           />
          </div>
-         <div className='flex flex-col items-center justify-center w-[26%]'>
-         <label className='text-md w-[100%] p-0.5'>Durante:</label>
+         <div className='flex flex-col items-center  justify-center w-[26%]'>
+         <label className='text-md w-[100%] p-0.5'>Duracion del tratamiento:</label>
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
           type='text'
           placeholder='5 dias'

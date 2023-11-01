@@ -95,7 +95,7 @@ function LoginForm() {
             {error && <div>{error}</div>}
             <div className='text-center justify-center w-full flex '>
               <h3>¿Aun no tienes cuenta? </h3>
-              <Link to="/registros">
+              <Link to="/registro">
                 <h3 className='text-[#159D95] '>Registrate</h3>
               </Link>
             </div>

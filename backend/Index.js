@@ -232,21 +232,44 @@ app.post('/login', (req,res) => { //req = peticion o request || res = response o
     })
 })
 
-app.post('/registro', (req,res) => {
-    const datos = req.body
+app.post('/registro', (req, res) => {
+    const datos = req.body;
 
-    const sql = 'INSERT INTO usuarios (correo, nombre, contrasena) VALUES (?,?,?)'
-    const values = [datos.correo, datos.nombre, datos.contrasena]
+    const insertSQL = 'INSERT INTO usuarios (correo, nombre, contrasena) VALUES (?,?,?)';
+    const selectSQL = 'SELECT * FROM usuarios WHERE id = LAST_INSERT_ID()'; // Assuming 'id' is the auto-increment primary key
 
-    conexion.query(sql,values,(error,resultados) => {
+    const values = [datos.correo, datos.nombre, datos.contrasena];
+
+    conexion.query(insertSQL, values, (error, resultados) => {
         if (error) {
-            console.error('Error al intentar crear usuario' + error.message);
+            console.error('Error al intentar crear usuario: ' + error.message);
             res.status(500).json({ error: 'Error al intentar crear el usuario' });
         } else {
-            res.json({ message: 'Usuario registrado con éxito' });
+            // After inserting the user, retrieve the newly inserted user's information
+            conexion.query(selectSQL, (selectError, selectResult) => {
+                if (selectError) {
+                    console.error('Error al intentar recuperar el usuario: ' + selectError.message);
+                    res.status(500).json({ error: 'Error al intentar recuperar el usuario' });
+                } else {
+                    // Assuming selectResult contains the user information
+                    res.json(selectResult);
+                }
+            });
         }
-    })
-})
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/api/perfil', (req,res) => {
     const sql = 'SELECT * FROM perfiles WHERE Id_Usuario = 2;'
@@ -257,6 +280,8 @@ app.get('/api/perfil', (req,res) => {
             res.status(500).json({ error: 'Error al intentar crear el usuario' });
         } else {
             res.json(resultados);
+            
         }
+        
     })
 })
