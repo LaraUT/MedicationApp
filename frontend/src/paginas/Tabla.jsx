@@ -51,10 +51,12 @@ function Tabla() {
 
         <div className='bg-white rounded-sm w-[90%] mx-auto h-[40%] border-x-2 border-b-4 border-t flex items-center justify-center flex-wrap py-8'>
           <main>
-          <div className='text-right'>
-              <button className='bg-cyan-500 w-44 h-8 rounded-md  text-white' type='submit' onClick={() => { setAbierto(true) }}>Agregar Medicamento</button>
-            </div>
-            
+          <div className='text-right '> 
+          <button  className="font-normal w-56 border-2 rounded-md px-5 border-[#0066b2] text-[#0066b2] hover:text-[#007FFF] hover:border-[#007FFF] hover:bg-[#007FFF] hover:bg-opacity-20 transition-all ease-in-out focus:ring focus:ring-[#00bfff] focus:[#0066b2]" onClick={()=> {setAbierto(true)}} >
+         Agregar Medicamentos
+        </button>
+        </div>
+
 
             <table className='h-80'>
               <table className='my-0.5 font-semibold'>
