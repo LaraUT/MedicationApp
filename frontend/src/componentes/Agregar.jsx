@@ -15,6 +15,11 @@ function Agregar({abierto, setAbierto}){
   });
   const [formularioData, setFormularioData] = useState(estadoInicial);
   const [resultado, setResultado] = useState('');
+  const [selectedFileType, setSelectedFileType] = useState('');
+
+  const handleFileTypeChange = (event) => {
+    setSelectedFileType(event.target.value);
+  };
 
   const handleInputChange = (event) => {
     const { name, value, type } = event.target;
@@ -62,18 +67,21 @@ function Agregar({abierto, setAbierto}){
     abierto&& (
         <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
         <div className="bg-white p-5 rounded flex flex-col justify-center items-center gap-5 h-2/2 w-3/2 relative">
-          <p className="w-80 text-center text-2xl ">Nuevo Producto:</p>
+          <p className="w-80 text-center text-2xl ">Nuevo Medicamento</p>
           
           <div className='flex flex-col items-center justify-center w-full'>
          <label className='text-md w-[60%] p-0.5'>Nombre:</label>
-          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[60%] '
-          type='text'
-          placeholder='Nombre del producto'
-
-          name="nombre" 
-          value={formularioData.nombre} 
-          onChange={handleInputChange}
-          />
+          <select
+            className="border text-center w-[60%] border-[#159D95] rounded-lg px-2 py-1 "
+            value={selectedFileType}
+            onChange={handleFileTypeChange}
+          >
+            <option   value="" disabled selected>-- Elegir Medicamento --</option>
+            <option value="Paracetamol">Paracetamol</option>
+            <option value="Sinuberase">Sinuberase</option>
+            <option value="Next">Next</option>
+          </select>
+      
          </div>
 
          <div className='flex flex-col items-center justify-center w-full'>
