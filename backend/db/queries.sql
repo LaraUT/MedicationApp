@@ -9,8 +9,8 @@ CREATE TABLE usuarios(
     fecha_creacion TIME DEFAULT NOW()
 );
 
-INSERT INTO usuarios (correo, nombre,contrasena,fecha_creacion) VALUES ('OctavioCC@gmail.com','Octavio','Patito',NOW()),
-																	   ('Elizabethct@gmail.com','Eli <3','Patito2',NOW());
+INSERT INTO usuarios (correo, nombre,contrasena,fecha_creacion) VALUES ('Octavio2CC@gmail.com','Octavio','Patito',NOW()),
+																	   ('Elizabethc2t@gmail.com','Eli <3','Patito2',NOW());
                                                                 
 SELECT * FROM usuarios;                                                                
                                                                 
@@ -39,8 +39,8 @@ CREATE TABLE Medicamentos (
     tomas INT NOT NULL,
     horaTomas INT NOT NULL,
     comentarios VARCHAR(200) DEFAULT 'Sin comentarios adicionales',
-    Id_Perfil INT,
-    FOREIGN KEY (Id_Perfil) REFERENCES perfiles(id)
+    Id_Usuario INT,
+    FOREIGN KEY (Id_Usuario) REFERENCES usuarios(id)
 );
 
 
@@ -79,7 +79,7 @@ BEGIN
     SET NEW.seccion = CalcularSeccion(NEW.hora_programada, NEW.SoloNecesario);
 END; //
 
-INSERT INTO Medicamentos (nombre, dosis, hora_programada, fecha_programada, seccion, SoloNecesario, tomas, horaTomas, comentarios,Id_Perfil) VALUES
+INSERT INTO Medicamentos (nombre, dosis, hora_programada, fecha_programada, seccion, SoloNecesario, tomas, horaTomas, comentarios,Id_Usuario) VALUES
 ('Paracetamol', '1 pastilla', '08:00:00','29-10-2023', 'Mañana', false, 7, 8, 'Tomar con comida',1),
 ('Naproxeno', '1 pastilla', '12:00:00','29-10-2023', 'Cuando sea necesario', false, 2, 12, 'No exceder la dosis recomendada',2),
 ('Diclofenaco', '2 pastillas', '15:30:00','29-10-2023', 'Tarde', false, 4, 6, 'Tomar después de las comidas',3),
@@ -94,13 +94,6 @@ INSERT INTO Medicamentos (nombre, dosis, hora_programada, fecha_programada, secc
 ('Simvastatina', '1 pastilla', '12:00:00', '29-10-2023', 'Medio día', false, 2, 8, 'Reducir el colesterol',4),
 ('Ibuprofeno', '2 pastillas', '15:30:00', '29-10-2023', 'Cuando sea necesario', false, 3, 10, 'Tomar con un vaso de leche',4),
 ('Salbutamol', '1 pastilla', '21:00:00', '29-10-2023', 'Noche', false, 10, 10, 'Aliviar la dificultad para respirar',3);
-
-SELECT * FROM Medicamentos WHERE Id_Perfil = 1;
-
-INSERT INTO Medicamentos (nombre, dosis, hora_programada, fecha_programada, seccion, SoloNecesario, tomas, horaTomas) VALUES
-('Prueba', '1 pastilla', '21:00:00', '29-10-2023', 'Noche', false, 10, 10);
-
-SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas >=0
 
 CREATE TABLE MedicamentosNombres(
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -122,12 +115,15 @@ INSERT INTO MedicamentosNombres (nombre) VALUES
 
 SELECT * FROM Medicamentos WHERE Id_Perfil = 1;
 
+INSERT INTO Medicamentos (nombre, dosis, hora_programada, fecha_programada, seccion, SoloNecesario, tomas, horaTomas) VALUES
+('Prueba', '1 pastilla', '21:00:00', '29-10-2023', 'Noche', false, 10, 10);
+
 
 
 
 
 insert into usuarios (correo, nombre,contrasena,fecha_creacion) values ('correo@algo.com','nombre','contrasena',NOW())
-select * from medicamentos where id_Usuario = 1
-select * from usuarios;
-SELECT * FROM medicamentos WHERE seccion = 'Cuando sea necesario' AND tomas > 0 AND Id_Usuario = 1
 
+
+
+show tables
