@@ -57,32 +57,54 @@ function Agregar({abierto, setAbierto}){
   };
 
   const handleSubmit = () => {
-    console.log('formularioData.comentarios:', formularioData.comentarios);
+    const errorMessages = [];
+
+    if (!formularioData.dosis.trim()) {
+      errorMessages.push('Por favor, ingrese la dosis del medicamento.');
+    }
+  
+    if (!formularioData.dias.trim()) {
+      errorMessages.push('Por favor, ingrese la cantidad de días del tratamiento.');
+    }
+  
+    if (!formularioData.horasP.trim()) {
+      errorMessages.push('Por favor, ingrese la cantidad de horas entre cada dosis.');
+    }
+  
+    // If there are any error messages, show them individually
+    if (errorMessages.length > 0) {
+      errorMessages.forEach((msg) => {
+        toast.warning(msg, { autoClose: 2000 });
+      });
+      return;
+    }
+  
+
     const comentarios = formularioData.comentarios.trim() === '' ? 'Sin comentarios adicionales' : formularioData.comentarios;
-    console.log('comentarios:', comentarios);
+  
     const formDataFinal = {
       ...formularioData,
       comentarios,
     };
-    // Realizar una solicitud POST con Axios
-    axios.post('http://localhost:8082/api/agregar', formDataFinal, {
-      params: {
-        user: localStorage.getItem('user')
-      }
-    })
-      .then(response => {
-        setResultado(response.data);
-        setAbierto(false)
-        setFormularioData(estadoInicial)
-        toast.success('Medicamento agregado :)');
-        setTriggerEffect((prev) => !prev);
-        console.log(triggerEffect)
+  
+    axios
+      .post('http://localhost:8082/api/agregar', formDataFinal, {
+        params: {
+          user: localStorage.getItem('user'),
+        },
       })
-      .catch(error => {
+      .then((response) => {
+        setResultado(response.data);
+        setAbierto(false);
+        setFormularioData(estadoInicial);
+        toast.success('¡Medicamento agregado!');
+        setTriggerEffect((prev) => !prev);
+      })
+      .catch((error) => {
         setResultado('Error al enviar el formulario');
       });
   };
-
+  
   return (
     abierto&& (
         <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
@@ -130,6 +152,7 @@ function Agregar({abierto, setAbierto}){
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[60%] '
           type='text'
           placeholder='Dosis del producto'
+          
 
           name='dosis'
           value={formularioData.dosis}
@@ -145,8 +168,9 @@ function Agregar({abierto, setAbierto}){
          <div className='flex flex-col items-center justify-center w-[26%]'>
          <label className='text-md w-[100%] p-0.5'>Horas entre cada dosis:</label>
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
-          type='text'
+          type='number'
           placeholder='8'
+          min='0'
 
           name='horasP'
           value={formularioData.horasP}
@@ -156,12 +180,14 @@ function Agregar({abierto, setAbierto}){
          <div className='flex flex-col items-center  justify-center w-[26%]'>
          <label className='text-md w-[100%] p-0.5'>Dias de tratamiento:</label>
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
-          type='text'
+          type='number'
           placeholder='5'
+          min='0'
 
           name='dias'
           value={formularioData.dias}
           onChange={handleInputChange}
+          
           />
         </div>
          </div>

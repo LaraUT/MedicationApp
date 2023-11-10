@@ -40,7 +40,15 @@ function LoginForm() {
   }, [datos.autenticado, datos.correo, datos.user]);
 
   const handleLogin = (e) => {
+
     e.preventDefault();
+
+        // Validation
+        if (!datos.correo.trim() || !datos.contrasena.trim()) {
+          setError('Por favor, complete todos los campos.');
+          return;
+        }
+
     axios
       .post('http://localhost:8082/login', datos)
       .then((respuesta) => {
@@ -55,7 +63,7 @@ function LoginForm() {
       })
       .catch((error) => {
         console.error('Error al iniciar sesión: ' + error);
-        setError('Error al iniciar sesión. Inténtalo de nuevo más tarde.');
+        setError('Credenciales incorrectas.');
       });
   };
 
@@ -111,13 +119,15 @@ function LoginForm() {
             <div className='text-center justify-center w-full'>
               <button type='submit' className='bg-[#5DC1B9] rounded-lg w-[30%] transition-all duration-300 ease-in-out hover:bg-teal-700 focus:ring focus:outline-none focus:ring-green-300 text-white'>INICIAR SESION</button>
             </div>
-            {error && <div>{error}</div>}
-            <div className='text-center justify-center w-full flex '>
-              <h3>¿Aun no tienes cuenta? </h3>
-              <Link to="/registro">
-                <h3 className='text-[#159D95] mx-2'>Registrate</h3>
-              </Link>
+            
+            <div className='text-center justify-center w-full flex flex-wrap '>
+            <div className='w-full '>{error && <span className="text-red-500">{error}</span>}</div>
+              
             </div>
+            <div className=' flex justify-center w-full'><h3>¿Aun no tienes cuenta? </h3>
+              <Link to="/registro">
+                <span className='text-[#159D95] mx-2'>Registrate</span>
+              </Link></div>
             <div className="w-full flex items-center justify-center">
               <h4 >Recordarme</h4>
               <input className="mx-2 mt-1" type="checkbox" />

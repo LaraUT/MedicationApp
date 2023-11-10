@@ -25,7 +25,7 @@ function Mañana() {
 
   const intervalId = setInterval(() => {
     fetchData();
-    console.log('esta jalando')
+    
   }, Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000); // Random time between 2 and 5 seconds
 
   // Clear the interval when the component is unmounted or when the dependency array changes
