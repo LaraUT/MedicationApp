@@ -170,7 +170,8 @@ function Tabla() {
            <h6 className='text-sm'>  El Equipo de MedicTabs</h6>
 
           <div className="w-3/4 flex justify-center">
-           <button className='px-2 border-2 border-sky-500 text-sky-500 rounded-md mb-1.5'>Entendido!</button>
+            <button className='px-2 border-2 border-sky-500 text-sky-500 rounded-md mb-1.5 transition-all duration-300 ease-in-out hover:bg-sky-500 hover:text-white focus:bg-sky-700 focus:text-white'>Entendido!
+            </button>
           </div>
         </div>
       </div>
@@ -200,7 +201,10 @@ function Tabla() {
             <p className='text-sm mb-2'>✔ Indica que se tomo el medicamento y programa su siguiente toma</p>
             <p className='text-sm'><span className='text-red-700 font-bold'>X</span> Elimina los medicamentos del calendario completamente</p>
             <div className='w-full flex justify-end mt-2'>
-              <button className='px-2 border-2 border-sky-500 text-sky-500 rounded-md mb-1.5'>Entendido!</button>
+            <button className='px-2 border-2 border-sky-500 text-sky-500 rounded-md mb-1.5 transition-all duration-300 ease-in-out hover:bg-sky-500 hover:text-white focus:bg-sky-700 focus:text-white '>Entendido!
+            </button>
+
+
             </div>
           </div>
         </div>
