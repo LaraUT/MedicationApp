@@ -26,14 +26,18 @@ function Agregar({abierto, setAbierto}){
   useEffect(() => {
     const fetchMedicamentos = async () => {
       try {
-        const response = await axios.get('http://localhost:8082/listaMedicamentos');
+        const response = await axios.get('http://localhost:8082/listaMedicamentos', {
+          params: {
+            user: localStorage.getItem('user')
+          }
+        });
         setMedicamentos(response.data.medicamentos);
       } catch (error) {
         console.error(error);
       }
     };
     fetchMedicamentos();
-  }, []);
+  }, [triggerEffect]);
 
   const handleInputChange = (event) => {
     const { name, value, type } = event.target;
@@ -150,10 +154,10 @@ function Agregar({abierto, setAbierto}){
           />
          </div>
          <div className='flex flex-col items-center  justify-center w-[26%]'>
-         <label className='text-md w-[100%] p-0.5'>Duracion del tratamiento:</label>
+         <label className='text-md w-[100%] p-0.5'>Dias de tratamiento:</label>
           <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
           type='text'
-          placeholder='5 dias'
+          placeholder='5'
 
           name='dias'
           value={formularioData.dias}

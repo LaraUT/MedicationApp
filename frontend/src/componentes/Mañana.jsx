@@ -20,10 +20,20 @@ function Mañana() {
       console.error('Error fetching data:', error);
     }
   };
-  fetchData();
-  return () => {
-  };
-  }, [triggerEffect]);
+
+  fetchData(); // fetch inicial
+
+  const intervalId = setInterval(() => {
+    fetchData();
+    console.log('esta jalando')
+  }, Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000); // Random time between 2 and 5 seconds
+
+  // Clear the interval when the component is unmounted or when the dependency array changes
+  return () => clearInterval(intervalId);
+}, [triggerEffect]);
+
+  
+
 
 
  
@@ -56,21 +66,42 @@ function Mañana() {
           <p>Loading...</p>
         )}
       </td>
-      {/*Tiempo - hora programada*/}
-      <td className='bg-[#FF9688] w-40 h-24 border-r-2'>
-        <td className='bg-[#FF9688] text-pink-600 w-40 h-fit text-center'>
-          {medicamentos ? (
-            medicamentos.map((medicamento, index) => (
-              <h2 key={medicamento.id} style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
-                {medicamento.hora_programada}
-                <button className='ml'  onClick={() => handleTime(medicamento.id)}>✔</button>
-              </h2>
-            ))
-          ) : (
-            <p>Loading...</p>
-          )}
-        </td>
-      </td>
+
+
+{/* Inicio hora */}
+
+      <td className='bg-[#FF9688] border-r-2 text-pink-600 w-40 h-fit text-center'>
+  {medicamentos ? (
+    medicamentos.map((medicamento, index) => {
+      const currentTime = new Date();
+      
+      // Use the current date instead of a fixed date (e.g., 2023-11-10)
+      const currentYear = currentTime.getFullYear();
+      const currentMonth = currentTime.getMonth() + 1; // Months are zero-based
+      const currentDay = currentTime.getDate();
+
+      const horaProgramada = new Date(`${currentYear}-${currentMonth}-${currentDay} ${medicamento.hora_programada}`);
+
+      // Check if the current time is greater than the scheduled time
+      const showButton = currentTime > horaProgramada;
+
+      return (
+        <h2 key={index} className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+          {medicamento.hora_programada}
+          {showButton && <button className='ml-2' onClick={() => handleTime(medicamento.id)}>✔</button>}
+        </h2>
+      );
+    })
+  ) : (
+    <p>Loading...</p>
+  )}
+</td>
+
+{/* Finalhora */}
+
+
+
+
       <td className='bg-[#FF9688] w-40 h-24 border-r-2  text-pink-600 text-center'>
         <td className='bg-[#FF9688]  w-40 h-fit '>
           {medicamentos ? (

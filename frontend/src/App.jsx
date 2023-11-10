@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 // RUTAS 
+import Home from "./paginas/Home"
 import Login from "./routes/Login"
 import Registros from "./paginas/Registros"
 import Tabla from "./paginas/Tabla"
@@ -11,7 +12,8 @@ import {ContextoContextProvider} from './context/MainContext'
 const router = createBrowserRouter([
   {
     path:"/",
-    element: <Login/>
+    element: <Home/>
+    
   },
   {
     path:"/registro",
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
   {
     path:"/tabla",
     element: <Tabla/>
+  },
+  {
+    path:"/login",
+    element: <Login/>
   }
  
  

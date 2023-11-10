@@ -43,8 +43,11 @@ app.get("/medicamentos",(peticion,respuesta)=>{
 })
 
 app.get('/listaMedicamentos', (req,respuesta) => {
-    const sql = "SELECT * FROM MedicamentosNombres WHERE usado != true ORDER BY nombre"
-    conexion.query(sql,(error, resultado) => {
+    const user = req.query.user;
+    console.log(user)
+    const values = [user]
+    const sql = "SELECT DISTINCT mn.nombre FROM MedicamentosNombres mn WHERE mn.nombre NOT IN ( SELECT DISTINCT m.nombre FROM Medicamentos m WHERE m.Id_Usuario = ?  );"
+    conexion.query(sql,values,(error, resultado) => {
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -55,7 +58,7 @@ app.get('/listaMedicamentos', (req,respuesta) => {
 
 app.get("/medicamentosManana",(req,respuesta)=>{   
     const user = req.query.user;
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas > 0 AND Id_Usuario = ? ;"
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas > 0 AND Id_Usuario = ? ORDER BY hora_programada;"
     const values = [user];
     conexion.query(sql,values,(error,resultado)=>{
         
@@ -69,7 +72,7 @@ app.get("/medicamentosManana",(req,respuesta)=>{
 
 app.get("/medicamentosMedio",(req,respuesta)=>{   
     const user = req.query.user;
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Medio dia' AND tomas > 0 AND Id_Usuario = ? ;"
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Medio dia' AND tomas > 0 AND Id_Usuario = ? ORDER BY hora_programada;"
     const values = [user];
     conexion.query(sql,values,(error,resultado)=>{
         
@@ -83,7 +86,7 @@ app.get("/medicamentosMedio",(req,respuesta)=>{
 
 app.get("/medicamentosTarde",(req,respuesta)=>{   
     const user = req.query.user;
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Tarde' AND tomas > 0 AND Id_Usuario = ? ;"
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Tarde' AND tomas > 0 AND Id_Usuario = ? ORDER BY hora_programada;"
     const values = [user];
     conexion.query(sql,values,(error,resultado)=>{
         
@@ -97,7 +100,7 @@ app.get("/medicamentosTarde",(req,respuesta)=>{
 
 app.get("/medicamentosNecesario",(req,respuesta)=>{   
     const user = req.query.user;
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Cuando sea necesario' AND tomas > 0 AND Id_Usuario = ? ;"
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Cuando sea necesario' AND tomas > 0 AND Id_Usuario = ? ORDER BY hora_programada;"
     const values = [user];
     conexion.query(sql,values,(error,resultado)=>{
         
@@ -111,7 +114,7 @@ app.get("/medicamentosNecesario",(req,respuesta)=>{
 
 app.get("/medicamentosNoche",(req,respuesta)=>{   
     const user = req.query.user;
-    const sql="SELECT * FROM medicamentos WHERE seccion = 'Noche' AND tomas > 0 AND Id_Usuario = ? ;"
+    const sql="SELECT * FROM medicamentos WHERE seccion = 'Noche' AND tomas > 0 AND Id_Usuario = ? ORDER BY hora_programada;"
     const values = [user];
     conexion.query(sql,values,(error,resultado)=>{
         

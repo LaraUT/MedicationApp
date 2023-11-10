@@ -76,7 +76,7 @@ function Tabla() {
         <div className='bg-white rounded-sm w-[90%] mx-auto h-[40%] border-x-2 border-b-4 border-t flex items-center justify-center flex-wrap py-8'>
         
 
-        <div className='flex items-center justify-between w-full'> 
+        <div className='flex items-center justify-between w-full mx-10'> 
             <button>
           <img className='w-6 h-6 ' src='https://cdn-icons-png.flaticon.com/128/1082/1082246.png?track=ais'onClick={() => {setAyuda1(true)}}/>
         </button> 
@@ -84,6 +84,9 @@ function Tabla() {
          Agregar Medicamentos
         </button>
         </div>
+
+
+
 
 
             <table className='h-80'>
