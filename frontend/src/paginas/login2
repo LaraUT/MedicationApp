@@ -4,14 +4,6 @@ import axios from 'axios';
 import {RiEyeLine, RiEyeOffLine} from "react-icons/ri";
 
 function LoginForm() {
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleShowPassword = () =>{
-    setShowPassword(!showPassword)
-
-  }
-
   const navigate = useNavigate();
 
   const [datos, setDatos] = useState({
@@ -69,7 +61,12 @@ function LoginForm() {
     return null;
   }
 
+  const [showPassword, setShowPassword] = useState(false);
 
+  const handleShowPassword = () =>{
+    setShowPassword(!showPassword)
+
+  }
 
 
   return (

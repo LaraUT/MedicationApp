@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Login from "./routes/Login"
 import Registros from "./paginas/Registros"
 import Tabla from "./paginas/Tabla"
+import './index.css';
 
 
 const router = createBrowserRouter([
@@ -28,7 +29,9 @@ function App() {
   return (
     <>
     <div>
+    <body>
       <RouterProvider router={router}/>
+      </body>
       </div>
     </>
   )

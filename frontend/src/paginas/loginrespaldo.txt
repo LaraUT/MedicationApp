@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {RiEyeLine, RiEyeOffLine} from "react-icons/ri";
+
 
 function LoginForm() {
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleShowPassword = () =>{
-    setShowPassword(!showPassword)
-
-  }
-
   const navigate = useNavigate();
 
   const [datos, setDatos] = useState({
@@ -69,9 +61,6 @@ function LoginForm() {
     return null;
   }
 
-
-
-
   return (
     !datos.autenticado ? (
       <form onSubmit={handleLogin}>
@@ -93,19 +82,12 @@ function LoginForm() {
               <label className='text-md w-[50%] p-1.5'>Contraseña:</label>
               <input
                 className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[50%]'
-                type= {showPassword ? "text" : "password"}
+                type='password'
                 placeholder='********'
                 name='contrasena'
                 value={datos.contrasena}
                 onChange={(e) => { setDatos({ ...datos, contrasena: e.target.value }) }}
               />
-              {showPassword ? (
-                <RiEyeOffLine onClick={handleShowPassword} className='absolute mr-[-21.5%] mt-[4%] -translate-y-1/2 hover:cursor-pointer'/>
-
-              ) : (
-                <RiEyeLine onClick={handleShowPassword} className='absolute mr-[-21.5%] mt-[4%] -translate-y-1/2 hover:cursor-pointer'/>
-              )}
-              
             </div>
             <div className='text-center justify-center w-full'>
               <button type='submit' className='bg-[#5DC1B9] rounded-lg w-[30%] transition-all duration-300 ease-in-out hover:bg-teal-700 focus:ring focus:outline-none focus:ring-green-300 text-white'>INICIAR SESION</button>
