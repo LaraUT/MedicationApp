@@ -11,7 +11,7 @@ function Registros() {
     contrasena: '',
     autenticado: false,
     user: '',   
-    contrasenaConfirm: '',
+    contrasenaConfirm: ''
   });
 
   const [error, setError] = useState('');
@@ -112,7 +112,7 @@ function Registros() {
       </div>
 
       <div className='text-center justify-center m-5 w-full'>
-          <button type='submit ' className='bg-[#5DC1B9] rounded-lg w-[30%] text-white'>Registrate</button>
+          <button type='submit ' className='bg-[#5DC1B9] rounded-lg w-[30%] transition-all duration-300 ease-in-out hover:bg-teal-700 focus:ring focus:outline-none focus:ring-green-300 text-white'>Registrate</button>
       </div>
 
       <div className="w-full flex items-center justify-center"> 

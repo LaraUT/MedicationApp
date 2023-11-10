@@ -283,7 +283,7 @@ app.post('/registro', (req, res) => {
 
 
 app.get('/api/perfil', (req,res) => {
-    const sql = 'SELECT * FROM perfiles WHERE Id_Usuario = 2;'
+    const sql = 'SELECT * FROM perfiles WHERE Id_Usuario = 1;'
 
     conexion.query(sql, (error,resultados) => {
         if (error) {

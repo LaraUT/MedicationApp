@@ -1,52 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useContexto } from '../context/MainContext';
 
 function Tarde() {
-  const [medicamentos, setMedicamentos] = useState([]);
   
-  const handleTime = (id) => {
-    axios
-      .put(`http://localhost:8082/api/hora/${id}`)
-      .then((response) => {
-        toast.success('Ha tomado su dosis!!! :) Hora actualizada');
-        // Actualizar la tabla una vez que la solicitud PUT sea exitosa
-        const updatedMedicamentos = medicamentos.map((medicamento) =>
-          medicamento.id === id
-            ? { ...medicamento, hasTaken: true }
-            : medicamento
-        );  
-        setMedicamentos(updatedMedicamentos);
-      })
-      .catch((error) =>
-        console.error('Error al realizar la solicitud PUT', error)
-      );
-  };
-
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:8082/api/eliminar/${id}`)
-    .then((response) => {
-      setMedicamentos(medicamentos.filter((medicamento) => medicamento.id !== id));
-      toast.error('Medicamento removido');
-    })
-    .catch((error) => {
-      console.error('Error deleting medication', error);
-    });
-  }
-
+  const [medicamentos, setMedicamentos] = useState([]);
+  const {handleDelete, handleTime, triggerEffect} = useContexto()
+      
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    
-    axios
-      .get('http://localhost:8082/medicamentosTarde',{
-        params: {user}
-      })
-      .then((respuesta) => {
-        setMedicamentos(respuesta.data.medicamentos);
-      })
-      .catch((error) => console.log(error));
-  },[]);
+  const fetchData = async () => {
+    try {
+      const user = localStorage.getItem('user');
+      const response = await axios.get('http://localhost:8082/medicamentosTarde', {
+        params: { user },
+      });
+      setMedicamentos(response.data.medicamentos);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  fetchData();
+  return () => {
+  };
+  }, [triggerEffect]);
+
+
 
   return (
     <>

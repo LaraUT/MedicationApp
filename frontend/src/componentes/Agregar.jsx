@@ -3,6 +3,8 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useContexto } from '../context/MainContext';
+
 function Agregar({abierto, setAbierto}){
 
   const estadoInicial = ({
@@ -15,6 +17,7 @@ function Agregar({abierto, setAbierto}){
   });
   const [formularioData, setFormularioData] = useState(estadoInicial);
   const [resultado, setResultado] = useState('');
+  const {triggerEffect, setTriggerEffect} = useContexto()
 
 
   const [medicamentos, setMedicamentos] = useState([]);
@@ -68,6 +71,8 @@ function Agregar({abierto, setAbierto}){
         setAbierto(false)
         setFormularioData(estadoInicial)
         toast.success('Medicamento agregado :)');
+        setTriggerEffect((prev) => !prev);
+        console.log(triggerEffect)
       })
       .catch(error => {
         setResultado('Error al enviar el formulario');

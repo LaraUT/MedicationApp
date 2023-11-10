@@ -1,35 +1,27 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useContexto } from '../context/MainContext';
 
  function Necesario() {
-    const [medicamentos, setMedicamentos] = useState([]);
-
-    const handleDelete = (id) => {
-      axios.delete(`http://localhost:8082/api/eliminar/${id}`)
-      .then((response) => {
-        setMedicamentos(medicamentos.filter((medicamento) => medicamento.id !== id));
-        toast.error('Medicamento removido');
-      })
-      .catch((error) => {
-        console.error('Error deleting medication', error);
-      });
-    }
-
-        
-    useEffect(() => {
-      const user = localStorage.getItem('user');
+  const [medicamentos, setMedicamentos] = useState([]);
+  const {handleDelete, triggerEffect} = useContexto()
       
-      axios
-        .get('http://localhost:8082/medicamentosNecesario',{
-          params: {user}
-        })
-        .then((respuesta) => {
-          setMedicamentos(respuesta.data.medicamentos);
-        })
-        .catch((error) => console.log(error));
-    },[]);
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const user = localStorage.getItem('user');
+      const response = await axios.get('http://localhost:8082/medicamentosNecesario', {
+        params: { user },
+      });
+      setMedicamentos(response.data.medicamentos);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  fetchData();
+  return () => {
+  };
+  }, [triggerEffect]);
 
   return (
     <>
