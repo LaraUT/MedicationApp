@@ -23,14 +23,28 @@ conexion.connect((error)=>{
    }
 })
 
+app.listen(8082,()=>{
+    console.log('Servidor disponible')
+})
+
+
 app.use(cors())
 
 app.get("/medicamentos",(peticion,respuesta)=>{
-     
-
     const sql="SELECT * FROM medicamentos WHERE tomas > 0 "
     
     conexion.query(sql,values,(error,resultado)=>{
+        if(error){
+            return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
+        } else{
+            return respuesta.json({Estatus:"Ok", medicamentos:resultado})
+        }
+    })
+})
+
+app.get('/listaMedicamentos', (req,respuesta) => {
+    const sql = "SELECT * FROM MedicamentosNombres WHERE usado != true ORDER BY nombre"
+    conexion.query(sql,(error, resultado) => {
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
         } else{
@@ -109,9 +123,6 @@ app.get("/medicamentosNoche",(req,respuesta)=>{
     })
 })
 
-app.listen(8082,()=>{
-    console.log('Servidor disponible')
-})
 
 
 app.post('/api/agregar', (req, res) => {

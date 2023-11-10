@@ -46,7 +46,7 @@ function Tarde() {
         setMedicamentos(respuesta.data.medicamentos);
       })
       .catch((error) => console.log(error));
-  },);
+  },[]);
 
   return (
     <>

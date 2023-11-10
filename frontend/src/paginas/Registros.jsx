@@ -12,7 +12,6 @@ function Registros() {
     autenticado: false,
     user: '',   
     contrasenaConfirm: '',
-    user: '',
   });
 
   const [error, setError] = useState('');

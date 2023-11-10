@@ -102,7 +102,25 @@ INSERT INTO Medicamentos (nombre, dosis, hora_programada, fecha_programada, secc
 
 SELECT * FROM medicamentos WHERE seccion = 'Mañana' AND tomas >=0
 
+CREATE TABLE MedicamentosNombres(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(40) UNIQUE,
+    usado BOOLEAN DEFAULT false
+);
 
+INSERT INTO MedicamentosNombres (nombre) VALUES 
+('Paracetamol'), ('Naproxeno'), ('Metformina'), ('Diclofenaco'), ('Acido Acetil salicilico'),
+('Salbutamol'), ('Losartan'), ('Ambroxol'), ('Sinuberase'),('Ibuprofeno'), 
+('Ciprofloxacino'), ('Simvastatina'), ('Amoxicilina'), ('Omeprazol'),
+('Atorvastatina'), ('Loratadina'), ('Sertralina'), ('Pantoprazol'), ('Lorazepam'), 
+('Paroxetina'),  ('Metronidazol'), ('Lisinopril'), ('Cetirizina'), ('Prednisona'),
+('Hidroclorotiazida'), ('Metoprolol'), ('Levotiroxina'), ('Amlodipina'), ('Escitalopram'),
+('Furosemida'), ('Clonazepam'), ('Warfarina'), ('Carbamazepina'), ('Risperidona'),
+('Mirtazapina'), ('Valsartan'), ('Salmeterol'), ('Candesartan'), ('Fenitoína'),
+('Fluoxetina'), ('Zolpidem'), ('Duloxetina'), ('Lisinopril-Hidroclorotiazida'),
+('Venlafaxina');
+
+SELECT * FROM Medicamentos WHERE Id_Perfil = 1;
 
 
 

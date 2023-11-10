@@ -46,7 +46,7 @@ import 'react-toastify/dist/ReactToastify.css';
           setMedicamentos(respuesta.data.medicamentos);
         })
         .catch((error) => console.log(error));
-    },);
+    },[setMedicamentos]);
 
   return (
     <> 

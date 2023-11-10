@@ -51,8 +51,13 @@ function Tabla() {
 
         <div className='bg-white rounded-sm w-[90%] mx-auto h-[40%] border-x-2 border-b-4 border-t flex items-center justify-center flex-wrap py-8'>
           <main>
-          <div className='text-right '> 
-          <button  className="font-normal w-56 border-2 rounded-md px-5 border-[#0066b2] text-[#0066b2] hover:text-[#007FFF] hover:border-[#007FFF] hover:bg-[#007FFF] hover:bg-opacity-20 transition-all ease-in-out focus:ring focus:ring-[#00bfff] focus:[#0066b2]" onClick={()=> {setAbierto(true)}} >
+
+          <div className='flex justify-end'> 
+          <span class="absolute flex h-3 w-3 mt-[-.3%] mr-[-.3%]">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+            </span>
+          <button  className="font-normal w-56 border-2 rounded-md px-5 border-[#0066b2] text-[#0066b2] hover:text-[#007FFF] hover:border-[#007FFF] hover:bg-[#007FFF] hover:bg-opacity-20 transition-all ease-in-out focus:ring focus:ring-[#00bfff] focus:[#0066b2]" onClick={()=> {setAbierto(true)}} >   
          Agregar Medicamentos
         </button>
         </div>
@@ -130,9 +135,9 @@ function Tabla() {
         <div className="absolute top-20 right-3 flex justify-end items-start">
         <div className="bg-white p-5 rounded border border-gray-100  flex flex-col justify-start items-center h-2/2 w-2/2 ">
         <button
-            className="font-bold text-sm hover:text-gray-400 text-black absolute top-0 right-0 p-2"
+            className="font-bold text-md hover:text-gray-400 text-black absolute top-0 right-0 p-2 transition-all ease-in-out "
             onClick={() => setIsopen(false)}>
-            X
+            x
           </button>
 
           <div className="w-3/4 flex flex-col justify-end items-center">

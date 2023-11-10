@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,11 +15,22 @@ function Agregar({abierto, setAbierto}){
   });
   const [formularioData, setFormularioData] = useState(estadoInicial);
   const [resultado, setResultado] = useState('');
-  const [selectedFileType, setSelectedFileType] = useState('');
 
-  const handleFileTypeChange = (event) => {
-    setSelectedFileType(event.target.value);
-  };
+
+  const [medicamentos, setMedicamentos] = useState([]);
+
+  // Luego, puedes usar useEffect para cargar la lista de medicamentos cuando el componente se monte
+  useEffect(() => {
+    const fetchMedicamentos = async () => {
+      try {
+        const response = await axios.get('http://localhost:8082/listaMedicamentos');
+        setMedicamentos(response.data.medicamentos);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMedicamentos();
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value, type } = event.target;
@@ -71,17 +82,38 @@ function Agregar({abierto, setAbierto}){
           
           <div className='flex flex-col items-center justify-center w-full'>
          <label className='text-md w-[60%] p-0.5'>Nombre:</label>
-          <select
-            className="border text-center w-[60%] border-[#159D95] rounded-lg px-2 py-1 "
-            value={selectedFileType}
-            onChange={handleFileTypeChange}
+
+
+
+
+         {/* Inicio del select */}
+         
+         <select
+            className="border text-center w-[60%] border-[#159D95] rounded-lg px-2 py-1 custom-select"
+            value={formularioData.nombre}
+            onChange={handleInputChange}
+            name="nombre"
           >
-            <option   value="" disabled selected>-- Elegir Medicamento --</option>
-            <option value="Paracetamol">Paracetamol</option>
-            <option value="Sinuberase">Sinuberase</option>
-            <option value="Next">Next</option>
+
+            <option value="" disabled selected >---- Elegir medicamento ----</option>
+
+            {medicamentos ? (
+          medicamentos.map((medicamento, index) => (
+            <option key={index} value={medicamento.nombre}>{medicamento.nombre}</option>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+
           </select>
-      
+
+
+
+          {/* Final del select */}
+
+
+
+
          </div>
 
          <div className='flex flex-col items-center justify-center w-full'>

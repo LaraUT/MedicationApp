@@ -46,14 +46,15 @@ function Mañana() {
         setMedicamentos(respuesta.data.medicamentos);
       })
       .catch((error) => console.log(error));
-  },);
+  },[]);
 
  
   return (
     <>
       {/*Nombre*/}
       <th className='bg-[#FF9688] w-40 h-fit border-r-2 text-pink-600 font-semibold'>Mañana
-        <img className='w-10 h-10 mb-auto mx-auto' src='https://cdn-icons-png.flaticon.com/128/3167/3167238.png'></img></th>
+        <img className='w-10 h-10 mb-auto mx-auto' src='https://cdn-icons-png.flaticon.com/128/3167/3167238.png'/>
+      </th>
       <td className='bg-[#FF9688] w-40 h-fit text-pink-600 border-r-2 '>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
