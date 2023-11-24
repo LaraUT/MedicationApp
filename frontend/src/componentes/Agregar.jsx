@@ -1,7 +1,5 @@
 import React,{ useState, useEffect } from 'react'
 import axios from 'axios'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { useContexto } from '../context/MainContext';
 
@@ -57,30 +55,10 @@ function Agregar({abierto, setAbierto}){
   };
 
   const handleSubmit = () => {
-    const errorMessages = [];
-
-    if (!formularioData.dosis.trim()) {
-      errorMessages.push('Por favor, ingrese la dosis del medicamento.');
-    }
   
-    if (!formularioData.dias.trim()) {
-      errorMessages.push('Por favor, ingrese la cantidad de días del tratamiento.');
-    }
-  
-    if (!formularioData.horasP.trim()) {
-      errorMessages.push('Por favor, ingrese la cantidad de horas entre cada dosis.');
-    }
-  
-    // If there are any error messages, show them individually
-    if (errorMessages.length > 0) {
-      errorMessages.forEach((msg) => {
-        toast.warning(msg, { autoClose: 2000 });
-      });
-      return;
-    }
   
 
-    const comentarios = formularioData.comentarios.trim() === '' ? 'Sin comentarios adicionales' : formularioData.comentarios;
+    const comentarios = formularioData.comentarios.trim() === '' ? 'Sin comentarios' : formularioData.comentarios;
   
     const formDataFinal = {
       ...formularioData,
@@ -97,7 +75,7 @@ function Agregar({abierto, setAbierto}){
         setResultado(response.data);
         setAbierto(false);
         setFormularioData(estadoInicial);
-        toast.success('¡Medicamento agregado!');
+
         setTriggerEffect((prev) => !prev);
       })
       .catch((error) => {
@@ -106,13 +84,13 @@ function Agregar({abierto, setAbierto}){
   };
   
   return (
-    abierto&& (
-        <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
+    
+        <div>
         <div className="bg-white p-5 rounded flex flex-col justify-center items-center gap-5 h-2/2 w-3/2 relative">
-          <p className="w-80 text-center text-2xl ">Nuevo Medicamento</p>
+          <p className="w-80 text-center text-2xl ">Agregar Nuevo Medicamento</p>
           
           <div className='flex flex-col items-center justify-center w-full'>
-         <label className='text-md w-[60%] p-0.5'>Nombre:</label>
+         <label className='text-md w-[60%] p-0.5'>Nombre del medicamento:</label>
 
 
 
@@ -120,13 +98,13 @@ function Agregar({abierto, setAbierto}){
          {/* Inicio del select */}
          
          <select
-            className="border text-center w-[60%] border-[#159D95] rounded-lg px-2 py-1 custom-select"
+            className="border text-center w-[60%] border-black rounded-sm px-2 py-1 custom-select"
             value={formularioData.nombre}
             onChange={handleInputChange}
             name="nombre"
           >
 
-            <option value="" disabled selected >---- Elegir medicamento ----</option>
+            <option value="" disabled selected > Elija una opcion </option>
 
             {medicamentos ? (
           medicamentos.map((medicamento, index) => (
@@ -148,10 +126,10 @@ function Agregar({abierto, setAbierto}){
          </div>
 
          <div className='flex flex-col items-center justify-center w-full'>
-         <label className='text-md w-[60%] p-0.5'>Dosis:</label>
-          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[60%] '
+         <label className='text-md w-[60%] p-0.5'>Dosis de la medicina:</label>
+          <input className='border-black border rounded-sm px-2 py-[.5%] w-[60%] '
           type='text'
-          placeholder='Dosis del producto'
+          placeholder='3 Pastillas - 3 Inyecciones'
           
 
           name='dosis'
@@ -165,11 +143,11 @@ function Agregar({abierto, setAbierto}){
          </div>
          
          <div className="flex w-full justify-center gap-8 ">
-         <div className='flex flex-col items-center justify-center w-[26%]'>
-         <label className='text-md w-[100%] p-0.5'>Horas entre cada dosis:</label>
-          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
+         <div className='flex flex-col items-center justify-center w-[32%]'>
+         <label className='text-md w-[100%] '>Horas entre cada tomada:</label>
+          <input className='border-black border rounded-sm px-2 py-[.5%] w-[100%] '
           type='number'
-          placeholder='8'
+          placeholder='12 Horas'
           min='0'
 
           name='horasP'
@@ -178,10 +156,10 @@ function Agregar({abierto, setAbierto}){
           />
          </div>
          <div className='flex flex-col items-center  justify-center w-[26%]'>
-         <label className='text-md w-[100%] p-0.5'>Dias de tratamiento:</label>
-          <input className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%] '
+         <label className='text-md w-[100%] p-0.5'>Dias de la prescripcion:</label>
+          <input className='border-black border rounded-sm px-2 py-[.5%] w-[100%] '
           type='number'
-          placeholder='5'
+          placeholder=' 7 Días'
           min='0'
 
           name='dias'
@@ -192,8 +170,8 @@ function Agregar({abierto, setAbierto}){
         </div>
          </div>
          <div className='flex flex-col items-center justify-center w-[60%] '>
-         <label className='text-md w-[100%] p-0.5'>Comentarios:</label>
-          <textarea className='border-[#159D95] border rounded-lg px-2 py-[.5%] w-[100%]'
+         <label className='text-md w-[100%] p-0.5'>Comentarios / Anotaciones:</label>
+          <textarea className='border-black border rounded-sm px-2 py-[.5%] w-[100%]'
           type='text'
           placeholder='Tomar antes de...'
 
@@ -203,7 +181,7 @@ function Agregar({abierto, setAbierto}){
           />
          </div>
          </div>
-         <h5>¿Solo cuando sea necesario?
+         <h5>¿Es este medicamento de toma solo cuando sea necesario?
            <input 
            className='ml-2' 
            type="checkbox"
@@ -215,17 +193,15 @@ function Agregar({abierto, setAbierto}){
            ></input> 
           </h5>
           <div className="w-3/4 flex justify-center">
-            <button className="bg-white m-5 px-2 border border-slate-500 rounded-md w-4/12" onClick={() => {setAbierto(false)}}>
-              Cancelar
-            </button>
-            <button className="text-white bg-cyan-500  m-5 px-2 border border-slate-500 rounded-md w-4/12" onClick={handleSubmit}>
+
+            <button className="text-white bg-black  m-5 py-2 px-4  border border-slate-500 rounded-md w-6/12" onClick={handleSubmit}>
               Agregar
             </button>
           </div>
         </div>
       </div>
      )
-  )
+  
 }
 
 export default Agregar

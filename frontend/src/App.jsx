@@ -12,7 +12,7 @@ import {ContextoContextProvider} from './context/MainContext'
 const router = createBrowserRouter([
   {
     path:"/",
-    element: <Home/>
+    element: <Login/>
     
   },
   {
@@ -23,10 +23,6 @@ const router = createBrowserRouter([
     path:"/tabla",
     element: <Tabla/>
   },
-  {
-    path:"/login",
-    element: <Login/>
-  }
  
  
 ])

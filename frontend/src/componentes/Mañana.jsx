@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useContexto } from '../context/MainContext';
+import amanecer from '../assets/amanecer.png'
 
 
 
@@ -14,7 +15,7 @@ function Mañana() {
       const user = localStorage.getItem('user');
       const response = await axios.get('http://localhost:8082/medicamentosManana', {
         params: { user },
-      });
+      }); 
       setMedicamentos(response.data.medicamentos);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -40,13 +41,13 @@ function Mañana() {
   return (
     <>
       {/*Nombre*/}
-      <th className='bg-[#FF9688] w-40 h-fit border-r-2 text-pink-600 font-semibold'>Mañana
-        <img className='w-10 h-10 mb-auto mx-auto' src='https://cdn-icons-png.flaticon.com/128/3167/3167238.png'/>
+      <th className='bg-[#FF9688] w-40 h-fit border-r-2 font-semibold'>Mañana
+        <img className='w-10 h-10 mb-auto mx-auto' src={amanecer}/>
       </th>
-      <td className='bg-[#FF9688] w-40 h-fit text-pink-600 border-r-2 '>
+      <td className='bg-[#FF9688] w-40 h-fit border-r-2 '>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 key={medicamento.id} style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+            <h2 key={medicamento.id} >
               {medicamento.nombre}
             </h2>
           ))
@@ -55,10 +56,10 @@ function Mañana() {
         )}
       </td>
       {/*Dosis*/}
-      <td className='bg-[#FF9688] w-40 h-fit border-r-2 text-pink-600 text-center'>
+      <td className='bg-[#FF9688] w-40 h-fit border-r-2 text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 key={medicamento.id} style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+            <h2 key={medicamento.id} >
               {medicamento.dosis}
             </h2>
           ))
@@ -70,7 +71,7 @@ function Mañana() {
 
 {/* Inicio hora */}
 
-      <td className='bg-[#FF9688] border-r-2 text-pink-600 w-40 h-fit text-center'>
+      <td className='bg-[#FF9688] border-r-2 w-40 h-fit text-center'>
   {medicamentos ? (
     medicamentos.map((medicamento, index) => {
       const currentTime = new Date();
@@ -83,12 +84,12 @@ function Mañana() {
       const horaProgramada = new Date(`${currentYear}-${currentMonth}-${currentDay} ${medicamento.hora_programada}`);
 
       // Check if the current time is greater than the scheduled time
-      const showButton = currentTime > horaProgramada;
+      const showButton = currentTime > horaProgramada;//se muestra el boton si ahpra es mayor que la hora programada
 
       return (
-        <h2 key={index} className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+        <h2 key={index} className='h-15' >
           {medicamento.hora_programada}
-          {showButton && <button className='ml-2' onClick={() => handleTime(medicamento.id)}>✔</button>}
+          {showButton && <button className='ml-2' onClick={() => handleTime(medicamento.id)}><span className='text-2xl'>+</span></button>}
         </h2>
       );
     })
@@ -102,11 +103,11 @@ function Mañana() {
 
 
 
-      <td className='bg-[#FF9688] w-40 h-24 border-r-2  text-pink-600 text-center'>
+      <td className='bg-[#FF9688] w-40 h-24 border-r-2  text-center'>
         <td className='bg-[#FF9688]  w-40 h-fit '>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 key={medicamento.id} style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }}>
+              <h2 key={medicamento.id} >
                 {medicamento.fecha_programada}
               </h2>
             ))
@@ -116,7 +117,7 @@ function Mañana() {
         </td>
       </td>
       {/*Comentarios*/}
-      <td className='bg-[#FF9688] text-pink-600 w-80 h-fit border-r-2'>
+      <td className='bg-[#FF9688] w-80 h-fit border-r-2'>
         <h2 className='h-30'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
@@ -129,7 +130,7 @@ function Mañana() {
           )}
         </h2>
       </td>
-      <td className=' bg-[#FF9688] text-pink-600 w-8 h-fit border-r-2'>
+      <td className=' bg-[#FF9688] w-8 h-fit border-r-2'>
       {medicamentos ? (
             medicamentos.map((medicamento, index) => (
               <button className='w-full' style={{ backgroundColor: index % 2 === 0 ? '#FF9688' : '#FFBAC7' }} onClick={() => handleDelete(medicamento.id)}>x</button>

@@ -9,10 +9,10 @@ const app=express()
 app.use(bodyParser.json());
 
 const conexion=mysql.createConnection({
-    host : 'localhost',
-    user: 'root',
-    password: '',
-    database: 'medictabs'
+    host : 'mysql-lara15.alwaysdata.net',
+    user: 'lara15',
+    password: 'Chorizokiller_15',
+    database: 'lara15_medicationapp'
 })
 
 conexion.connect((error)=>{
@@ -46,7 +46,7 @@ app.get('/listaMedicamentos', (req,respuesta) => {
     const user = req.query.user;
     console.log(user)
     const values = [user]
-    const sql = "SELECT DISTINCT mn.nombre FROM MedicamentosNombres mn WHERE mn.nombre NOT IN ( SELECT DISTINCT m.nombre FROM Medicamentos m WHERE m.Id_Usuario = ?  );"
+    const sql = "SELECT DISTINCT mn.nombre FROM medicamentosnombres mn WHERE mn.nombre NOT IN ( SELECT DISTINCT m.nombre FROM medicamentos m WHERE m.Id_Usuario = ?  );"
     conexion.query(sql,values,(error, resultado) => {
         if(error){
             return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
@@ -138,7 +138,7 @@ app.post('/api/agregar', (req, res) => {
     const user = req.query.user;
     const datos = req.body
     const tomas = (datos.dias * 24) / datos.horasP
-    const sql= "INSERT INTO Medicamentos (nombre, dosis, hora_programada, tomas, horaTomas, comentarios, SoloNecesario,Id_Usuario) VALUES (?,?,?,?,?,?,?,?)"
+    const sql= "INSERT INTO medicamentos (nombre, dosis, hora_programada, tomas, horaTomas, comentarios, SoloNecesario,Id_Usuario) VALUES (?,?,?,?,?,?,?,?)"
     const values = [datos.nombre, datos.dosis, formattedTime, tomas, datos.horasP,datos.comentarios,datos.SoloNecesario,user]
 
     conexion.query(sql, values, (error, resultados) =>{
@@ -166,7 +166,7 @@ app.delete('/api/eliminar/:id', (req,res) => {
 
 app.put('/api/hora/:id', (req, res) => {
     const id = req.params.id;
-    const selectSql = "SELECT tomas,horaTomas FROM Medicamentos WHERE id = ?";
+    const selectSql = "SELECT tomas,horaTomas FROM medicamentos WHERE id = ?";
     const selectValues = [id];
 
     conexion.query(selectSql, selectValues, (error, resultados) => {
@@ -207,7 +207,7 @@ app.put('/api/hora/:id', (req, res) => {
                 console.log("Current time in Cancun:", formattedTime);
                 console.log("Time in Cancun + Algo hours:", horaNueva);
 
-                const upd = 'UPDATE Medicamentos SET hora_programada = ? ,tomas = ?,fecha_programada = ? WHERE id = ?;';
+                const upd = 'UPDATE medicamentos SET hora_programada = ? ,tomas = ?,fecha_programada = ? WHERE id = ?;';
                 const updValues = [horaNueva, tomasRes,fecha, id];
                 conexion.query(upd, updValues, (error, resultados) => {
                     if (error) {

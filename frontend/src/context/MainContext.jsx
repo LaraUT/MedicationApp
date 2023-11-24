@@ -32,7 +32,7 @@ export const ContextoContextProvider = ({children}) => {
         axios
           .put(`http://localhost:8082/api/hora/${id}`)
           .then((response) => {
-            toast.success('Ha tomado su dosis!!! :) Hora actualizada');
+           
             const updatedMedicamentos = medicamentos.map((medicamento) =>
               medicamento.id === id
                 ? { ...medicamento, hasTaken: true }
@@ -50,7 +50,6 @@ export const ContextoContextProvider = ({children}) => {
         axios.delete(`http://localhost:8082/api/eliminar/${id}`)
         .then((response) => {
           setMedicamentos(medicamentos.filter((medicamento) => medicamento.id !== id));
-          toast.error('Medicamento removido');
           setTriggerEffect((prev) => !prev);
         })
         .catch((error) => {

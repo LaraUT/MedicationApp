@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import { useContexto } from '../context/MainContext';
+import mediodia from '../assets/sol.png'
 
 
  function MedioDia() {
@@ -34,12 +35,12 @@ import { useContexto } from '../context/MainContext';
   return (
     <> 
                                               {/*Tiempo - hora programada*/}
-      <th className='bg-[#FFDBAF] w-40 h-24 border-r-2  text-orange-400 font-semibold'>Mediodia
-      <img className='items-center justify-center mx-auto mb-auto w-10 h-10 ' src='https://cdn-icons-png.flaticon.com/128/4224/4224494.png'></img></th>
-      <td className='bg-[#FFDBAF]  w-40 h-fit text-orange-400 border-r-2'>
+      <th className='bg-[#F8DA45] w-40 h-24 border-r-2  font-semibold'>Mediodia
+      <img className='items-center justify-center mx-auto mb-auto w-10 h-10 ' src={mediodia}></img></th>
+      <td className='bg-[#FFFF71]  w-40 h-fit border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2   style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2  >
               {medicamento.nombre}
             </h2>
           ))
@@ -48,10 +49,10 @@ import { useContexto } from '../context/MainContext';
         )}
       </td>
                                                 {/*Dosis*/}
-      <td className='bg-[#FFDBAF]  w-40 h-fit border-r-2 text-orange-400 text-center'>
+      <td className='bg-[#FFFF71]  w-40 h-fit border-r-2 text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 key={index}  style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2 key={index}  >
               {medicamento.dosis}
             </h2>
           ))
@@ -62,7 +63,7 @@ import { useContexto } from '../context/MainContext';
 
             {/* Inicio hora */}
 
-      <td className='bg-[#FFDBAF] text-orange-400 border-r-2 w-40 h-fit text-center'>
+      <td className='bg-[#FFFF71] border-r-2 w-40 h-fit text-center'>
   {medicamentos ? (
     medicamentos.map((medicamento, index) => {
       const currentTime = new Date();
@@ -78,9 +79,9 @@ import { useContexto } from '../context/MainContext';
       const showButton = currentTime > horaProgramada;
 
       return (
-        <h2 key={index} className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+        <h2 key={index} className='h-15' >
           {medicamento.hora_programada}
-          {showButton && <button className='ml-2' onClick={() => handleTime(medicamento.id)}>✔</button>}
+          {showButton && <button className='ml-2' onClick={() => handleTime(medicamento.id)}><span className='text-2xl'>+</span></button>}
         </h2>
       );
     })
@@ -92,11 +93,11 @@ import { useContexto } from '../context/MainContext';
 {/* Finalhora */}
 
 
-      <td className='bg-[#FFDBAF] w-40 h-fit border-r-2 text-center'>
-        <td className='bg-[#FFDBAF] text-orange-400  w-40 h-fit'>
+      <td className='bg-[#FFFF71] w-40 h-fit border-r-2 text-center'>
+        <td className='bg-[#FFFF71]  w-40 h-fit'>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 key={index}  style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+              <h2 key={index} >
                 {medicamento.fecha_programada}
               </h2>
             ))
@@ -106,10 +107,10 @@ import { useContexto } from '../context/MainContext';
         </td>
       </td>
 
-      <td className='bg-[#FFDBAF] text-orange-400 w-80 border-r-2'>
+      <td className='bg-[#FFFF71] w-80 border-r-2'>
             <h2 className='h-30'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 key={index}  className="w-30" style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }}>
+            <h2 key={index}  className="w-30" >
               {medicamento.comentarios}
             </h2>
           ))
@@ -118,10 +119,10 @@ import { useContexto } from '../context/MainContext';
         )}
 </h2>      
       </td>
-      <td className=' bg-[#FFDBAF] text-orange-400 w-8 h-fit border-r-2'>
+      <td className=' bg-[#FFFF71] w-8 h-fit border-r-2'>
       {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <button className='w-full' style={{ backgroundColor: index % 2 === 0 ? '#FFDBAF' : '#FFF9CE' }} onClick={() => handleDelete(medicamento.id)}>x</button>
+              <button className='w-full' onClick={() => handleDelete(medicamento.id)}>x</button>
             ))
           ) : (
             <p>Loading...</p>

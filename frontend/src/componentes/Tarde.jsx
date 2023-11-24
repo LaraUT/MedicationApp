@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useContexto } from '../context/MainContext';
+import tarde from '../assets/dom.png'
 
 function Tarde() {
   
@@ -34,12 +35,12 @@ function Tarde() {
   return (
     <>
                                               {/*Nombre*/}
-      <th className='bg-[#5DC1B9] w-40 h-24 border-r-2  text-teal-700  font-semibold'>Tarde
-      <img className='w-10 h-10 mb-auto mx-auto' src='https://cdn-icons-png.flaticon.com/128/10179/10179410.png'></img></th>
-      <td className='bg-[#8BDFD8]  w-40 h-fit text-teal-700 border-r-2'>
+      <th className='bg-[#5DC1B9] w-40 h-24 border-r-2   font-semibold'>Tarde
+      <img className='w-10 h-10 mb-auto mx-auto' src={tarde}></img></th>
+      <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 >
               {medicamento.nombre}
             </h2>
           ))
@@ -49,10 +50,10 @@ function Tarde() {
       </td>
 
                                         {/*Dosis*/}
-      <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2 text-teal-700 text-center'>
+      <td className='bg-[#8BDFD8]  w-40 h-fit border-r-2 text-center'>
         {medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 key={index} >
               {medicamento.dosis}
             </h2>
           ))
@@ -63,7 +64,7 @@ function Tarde() {
 
           {/* Inicio hora */}
 
-      <td className='bg-[#8BDFD8] border-r-2 text-teal-700 w-40 h-fit text-center'>
+      <td className='bg-[#8BDFD8] border-r-2 w-40 h-fit text-center'>
   {medicamentos ? (
     medicamentos.map((medicamento, index) => {
       const currentTime = new Date();
@@ -79,9 +80,9 @@ function Tarde() {
       const showButton = currentTime > horaProgramada;
 
       return (
-        <h2 key={index} className='h-15' style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+        <h2 key={index} className='h-15' >
           {medicamento.hora_programada}
-          {showButton && <button className='ml-2' onClick={() => handleTime(medicamento.id)}>✔</button>}
+          {showButton && <button className='ml-2' onClick={() => handleTime(medicamento.id)}><span className='text-2xl'>+</span></button>}
         </h2>
       );
     })
@@ -94,11 +95,11 @@ function Tarde() {
 
 
                                 {/*Tiempo - ultima_hora*/}
-        <td className='bg-[#8BDFD8] w-40 h-24 border-r-2  text-teal-700 text-center'>
+        <td className='bg-[#8BDFD8] w-40 h-24 border-r-2  text-center'>
         <td className='bg-[#8BDFD8]  w-40 h-fit '>
           {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <h2 key={index} style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+              <h2 key={index} >
                 {medicamento.fecha_programada}
               </h2>
             ))
@@ -109,9 +110,9 @@ function Tarde() {
       </td>
                                         {/*Comentarios*/}
           <td className='bg-[#8BDFD8]  w-80 h-fit border-r-2'>
-            <h2 className='h-30 text-teal-700'>{medicamentos ? (
+            <h2 className='h-30'>{medicamentos ? (
           medicamentos.map((medicamento, index) => (
-            <h2 key={index} className='w-30'style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }}>
+            <h2 key={index} className='w-30'>
               {medicamento.comentarios}
             </h2>
           ))
@@ -120,10 +121,10 @@ function Tarde() {
         )}
           </h2>      
       </td>
-      <td className=' bg-[#8BDFD8] text-teal-700 w-8 h-fit border-r-2'>
+      <td className=' bg-[#8BDFD8] w-8 h-fit border-r-2'>
       {medicamentos ? (
             medicamentos.map((medicamento, index) => (
-              <button className='w-full' style={{ backgroundColor: index % 2 === 0 ? '#5DC1B9' : '#8BDFD8' }} onClick={() => handleDelete(medicamento.id)}>x</button>
+              <button className='w-full'  onClick={() => handleDelete(medicamento.id)}>x</button>
             ))
           ) : (
             <p>Loading...</p>
